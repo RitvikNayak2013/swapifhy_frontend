@@ -1,4 +1,4 @@
-// ================= DARK MODE TOGGLE =================
+//this is the js for the dark mode toggle feature
 const themeToggle = document.getElementById('themeToggle');
 const themeToggleMobile = document.getElementById('themeToggleMobile');
 
@@ -9,7 +9,7 @@ function toggleTheme() {
 themeToggle?.addEventListener('click', toggleTheme);
 themeToggleMobile?.addEventListener('click', toggleTheme);
 
-// ================= MOBILE MENU =================
+// mobile menu specifications
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const mobileMenu = document.getElementById("mobileMenu");
 const mobileMenuClose = document.getElementById("mobileMenuClose");
@@ -43,7 +43,7 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeMobileMenu();
 });
 
-// ================= SMOOTH CURSOR & GLOW PHYSICS =================
+
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorRing = document.querySelector('.cursor-ring');
 const mouseGlow = document.querySelector('.mouse-glow');
@@ -78,7 +78,7 @@ document.querySelectorAll('.hover-target').forEach(target => {
   target.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
 });
 
-// ================= MAGNETIC BUTTONS =================
+// this is the js and movement for magnetic button feature
 document.querySelectorAll('.magnetic').forEach(btn => {
   btn.addEventListener('mousemove', (e) => {
     const rect = btn.getBoundingClientRect();
@@ -89,7 +89,7 @@ document.querySelectorAll('.magnetic').forEach(btn => {
   btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px) scale(1)`; });
 });
 
-// ================= 3D CARD GLARE =================
+// glare from the 3d cards
 document.querySelectorAll('.glare-card').forEach(card => {
   const glare = card.querySelector('.glare');
   card.addEventListener('mousemove', (e) => {
@@ -113,7 +113,6 @@ document.querySelectorAll('.glare-card').forEach(card => {
   });
 });
 
-// ================= SCROLL NAV & REVEAL =================
 window.addEventListener('scroll', () => {
   const header = document.getElementById('header');
   if (window.scrollY > 30) header.classList.add('scrolled');
