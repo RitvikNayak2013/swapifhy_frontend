@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swapifhy | The Trustworthy Skill Exchange</title>
+  <title>Swapifhy</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
@@ -27,6 +27,7 @@
     <a href="#home" class="logo hover-target magnetic">
       <span class="logo-mark"></span> Swapifhy
     </a>
+
     <nav>
       <a href="#about" class="hover-target">What is it?</a>
       <a href="#features" class="hover-target">Features</a>
@@ -36,8 +37,48 @@
         <div class="knob"></div>
       </div>
     </nav>
-    <a href="#join" class="btn-gradient hover-target magnetic"><span>Start Swapping</span></a>
+
+    <div class="header-actions">
+      <a href="#join" class="btn-gradient hover-target magnetic desktop-cta"><span>Start Swapping</span></a>
+
+      <!-- Mobile hamburger -->
+      <button class="mobile-menu-btn hover-target" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false"
+        aria-controls="mobileMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
   </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-panel">
+      <div class="mobile-menu-header">
+        <div class="logo">
+          <span class="logo-mark"></span> Swapifhy
+        </div>
+        <button class="mobile-menu-close hover-target" id="mobileMenuClose" aria-label="Close menu">✕</button>
+      </div>
+
+      <div class="mobile-menu-links">
+        <a href="#about" class="hover-target mobile-link">What is it?</a>
+        <a href="#features" class="hover-target mobile-link">Features</a>
+        <a href="#how-it-works" class="hover-target mobile-link">How it Works</a>
+        <a href="#team" class="hover-target mobile-link">Team</a>
+
+        <div class="mobile-menu-row">
+          <span class="mobile-menu-label">Theme</span>
+          <div class="theme-switch hover-target" id="themeToggleMobile">
+            <div class="knob"></div>
+          </div>
+        </div>
+
+        <a href="#join" class="btn-gradient hover-target magnetic" style="width: 100%; justify-content: center;">
+          <span>Start Swapping</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <section id="home" class="hero">
     <div class="floating-emoji emoji-1">🎨</div>
