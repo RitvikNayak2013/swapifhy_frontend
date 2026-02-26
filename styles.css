@@ -1,4 +1,4 @@
-/* ================= SWAPIFHY BRAND VARIABLES ================= */
+/*brand variables and colors from anwesha*/
 :root {
   --swap-blue: #8EB9FF;
   --swap-blue-hover: #76A4F5;
@@ -57,7 +57,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ================= BACKGROUNDS ================= */
 .grid-bg {
   position: fixed;
   inset: 0;
@@ -160,12 +159,10 @@ body.hovering .cursor-ring {
   backdrop-filter: blur(2px);
 }
 
-/* Hide custom cursor on touch devices */
 @media (pointer: coarse) {
   .cursor-dot, .cursor-ring { display: none !important; }
 }
 
-/* ================= HEADER & NAV ================= */
 header {
   display: flex;
   justify-content: space-between;
@@ -307,7 +304,7 @@ body.dark-mode .theme-switch .knob { transform: translateX(26px); }
   gap: 14px;
 }
 
-/* Mobile menu button (hidden on desktop) */
+/* mobile menu button hidden on desktop) */
 .mobile-menu-btn {
   display: none;
   width: 44px;
@@ -329,7 +326,7 @@ body.dark-mode .theme-switch .knob { transform: translateX(26px); }
   display: block;
 }
 
-/* Mobile menu overlay */
+/* mobile menu overlay */
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -415,7 +412,6 @@ body.dark-mode .theme-switch .knob { transform: translateX(26px); }
   color: var(--text-muted);
 }
 
-/* ================= SHARED LAYOUT ================= */
 section {
   padding: 120px 5%;
   position: relative;
@@ -449,7 +445,6 @@ section {
   color: transparent;
 }
 
-/* ================= HERO ================= */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -589,7 +584,6 @@ body.loaded .waitlist-wrapper { opacity: 1; transform: translateY(0); }
 
 .waitlist-wrapper .btn-gradient { padding: 14px 28px; }
 
-/* ================= MARQUEE ================= */
 .marquee-section {
   padding: 24px 0;
   border-top: 1px solid var(--border-color);
@@ -641,7 +635,6 @@ body.loaded .waitlist-wrapper { opacity: 1; transform: translateY(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* ================= WHAT IS SWAPIFHY & SKILL MATH ================= */
 .intro-text {
   text-align: center;
   max-width: 800px;
@@ -698,7 +691,6 @@ body.loaded .waitlist-wrapper { opacity: 1; transform: translateY(0); }
   font-weight: 700;
 }
 
-/* ================= GLARE CARDS (Features) ================= */
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -779,7 +771,6 @@ body.dark-mode .glare {
   z-index: 2;
 }
 
-/* ================= HOW IT WORKS (Timeline) ================= */
 .timeline {
   position: relative;
   max-width: 800px;
@@ -859,7 +850,6 @@ body.dark-mode .glare {
   font-weight: 600;
 }
 
-/* ================= TEAM ================= */
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -978,7 +968,6 @@ footer {
 
 .reveal-right.active { opacity: 1; transform: translateX(0); }
 
-/* ================= RESPONSIVE (MOBILE) ================= */
 @media (max-width: 1024px) {
   header { padding: 20px 5%; }
 }
