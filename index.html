@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swapifhy</title>
+  <title>Swapifhy | The Trustworthy Skill Exchange</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -27,7 +26,6 @@
     <a href="#home" class="logo hover-target magnetic">
       <span class="logo-mark"></span> Swapifhy
     </a>
-
     <nav>
       <a href="#about" class="hover-target">What is it?</a>
       <a href="#features" class="hover-target">Features</a>
@@ -37,48 +35,8 @@
         <div class="knob"></div>
       </div>
     </nav>
-
-    <div class="header-actions">
-      <a href="#join" class="btn-gradient hover-target magnetic desktop-cta"><span>Start Swapping</span></a>
-
-      <!-- Mobile hamburger -->
-      <button class="mobile-menu-btn hover-target" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false"
-        aria-controls="mobileMenu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-    </div>
+    <a href="#join" class="btn-gradient hover-target magnetic"><span>Start Swapping</span></a>
   </header>
-
-  <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-panel">
-      <div class="mobile-menu-header">
-        <div class="logo">
-          <span class="logo-mark"></span> Swapifhy
-        </div>
-        <button class="mobile-menu-close hover-target" id="mobileMenuClose" aria-label="Close menu">✕</button>
-      </div>
-
-      <div class="mobile-menu-links">
-        <a href="#about" class="hover-target mobile-link">What is it?</a>
-        <a href="#features" class="hover-target mobile-link">Features</a>
-        <a href="#how-it-works" class="hover-target mobile-link">How it Works</a>
-        <a href="#team" class="hover-target mobile-link">Team</a>
-
-        <div class="mobile-menu-row">
-          <span class="mobile-menu-label">Theme</span>
-          <div class="theme-switch hover-target" id="themeToggleMobile">
-            <div class="knob"></div>
-          </div>
-        </div>
-
-        <a href="#join" class="btn-gradient hover-target magnetic" style="width: 100%; justify-content: center;">
-          <span>Start Swapping</span>
-        </a>
-      </div>
-    </div>
-  </div>
 
   <section id="home" class="hero">
     <div class="floating-emoji emoji-1">🎨</div>
@@ -90,15 +48,36 @@
 
     <div class="hero-content">
       <div class="badge hover-target magnetic"><span class="badge-dot"></span> I made this a placeholder we can replace
-        with upcoming events
-      </div>
+        with upcoming events</div>
       <h1>Learn <span class="text-gradient">with</span> people —<br>not <span class="text-gradient">from</span> them.
       </h1>
       <p>No more lonely tutorials. No more awkward 'teach me' DMs.<br>Create. Connect. Build. Repeat.</p>
-      <div class="waitlist-wrapper hover-target">
-        <input type="email" placeholder="Enter your email to join the waitlist...">
-        <button class="btn-gradient magnetic"><span>Join Waitlist</span></button>
+
+      <div class="waitlist-container">
+        <div class="waitlist-wrapper hover-target" id="waitlist-form">
+          <input type="email" id="email-input" placeholder="Enter your email to join the waitlist...">
+          <button class="btn-gradient magnetic" id="join-btn"><span>Join Waitlist</span></button>
+        </div>
+
+        <div class="waitlist-success" id="waitlist-success" style="display: none;">
+          <div class="success-badge hover-target">
+            <span class="badge-icon">✨</span>
+            <div class="badge-text">
+              <strong>Founding Member</strong>
+              <span>Swapifhy Waitlist</span>
+            </div>
+          </div>
+          <a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20secured%20my%20spot%20as%20a%20Founding%20Member%20on%20Swapifhy!%20%E2%9C%A8%0A%0AThe%20platform%20where%20creators%20swap%20skills%20to%20build%20cool%20things%20together.%20Come%20join%20the%20waitlist!%20%23Swapifhy"
+            target="_blank" class="linkedin-flex-btn magnetic hover-target">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+            <span>Flex my badge on LinkedIn</span>
+          </a>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -117,36 +96,28 @@
     <div class="intro-text reveal">
       <p>Swapifhy is a <strong>teen-led platform</strong> where people exchange skills instead of money. You can teach
         someone guitar and learn video editing in return — building connections, creativity, and confidence along the
-        way.</p>
-      <br>
+        way.</p><br>
       <p>Imagine if a skill-sharing app, a creative playground, and a group chat had a baby. <strong>That's us.</strong>
       </p>
     </div>
-
     <div class="math-grid reveal">
-      <div class="math-card hover-target">
-        <span class="math-pill">Draw</span> <span class="math-symbol">+</span> <span class="math-pill">Code</span> <span
-          class="math-symbol">=</span> <span class="math-result">Animated Short</span>
+      <div class="math-card hover-target"><span class="math-pill">Draw</span> <span class="math-symbol">+</span> <span
+          class="math-pill">Code</span> <span class="math-symbol">=</span> <span class="math-result">Animated
+          Short</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Write</span> <span class="math-symbol">+</span> <span
+          class="math-pill">Design</span> <span class="math-symbol">=</span> <span class="math-result">Brand
+          Story</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Sing</span> <span class="math-symbol">+</span> <span
+          class="math-pill">Edit</span> <span class="math-symbol">=</span> <span class="math-result">Music Video</span>
       </div>
-      <div class="math-card hover-target">
-        <span class="math-pill">Write</span> <span class="math-symbol">+</span> <span class="math-pill">Design</span>
-        <span class="math-symbol">=</span> <span class="math-result">Brand Story</span>
-      </div>
-      <div class="math-card hover-target">
-        <span class="math-pill">Sing</span> <span class="math-symbol">+</span> <span class="math-pill">Edit</span> <span
-          class="math-symbol">=</span> <span class="math-result">Music Video</span>
-      </div>
-      <div class="math-card hover-target">
-        <span class="math-pill">Code</span> <span class="math-symbol">+</span> <span class="math-pill">Market</span>
-        <span class="math-symbol">=</span> <span class="math-result">Launch a Product</span>
-      </div>
-      <div class="math-card hover-target">
-        <span class="math-pill">Illustrate</span> <span class="math-symbol">+</span> <span
-          class="math-pill">Write</span> <span class="math-symbol">=</span> <span class="math-result">Comic Book</span>
-      </div>
-      <div class="math-card hover-target">
-        <span class="math-pill">Act</span> <span class="math-symbol">+</span> <span class="math-pill">Direct</span>
-        <span class="math-symbol">=</span> <span class="math-result">Short Film</span>
+      <div class="math-card hover-target"><span class="math-pill">Code</span> <span class="math-symbol">+</span> <span
+          class="math-pill">Market</span> <span class="math-symbol">=</span> <span class="math-result">Launch a
+          Product</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Illustrate</span> <span class="math-symbol">+</span>
+        <span class="math-pill">Write</span> <span class="math-symbol">=</span> <span class="math-result">Comic
+          Book</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Act</span> <span class="math-symbol">+</span> <span
+          class="math-pill">Direct</span> <span class="math-symbol">=</span> <span class="math-result">Short Film</span>
       </div>
     </div>
   </section>
@@ -219,9 +190,8 @@
       </div>
     </div>
     <div class="timeline-footer-quote reveal">
-      <p>Somewhere in that chaos — ideas are born, friendships happen, and projects come to life.<br><br>
-        <span style="color: var(--swap-pink); font-size: 1.5rem;">"Not just skill-swapping. Soul-swapping."</span>
-      </p>
+      <p>Somewhere in that chaos — ideas are born, friendships happen, and projects come to life.<br><br><span
+          style="color: var(--swap-pink); font-size: 1.5rem;">"Not just skill-swapping. Soul-swapping."</span></p>
     </div>
   </section>
 
@@ -236,44 +206,75 @@
   <section id="team">
     <div class="section-header reveal">
       <h2 class="section-title">Meet Our <span class="text-gradient">Team</span></h2>
-      <p class="section-subtitle">Built by students, powered by passion, fueled by creativity.</p>
+      <p class="section-subtitle">Click on a team member to read their story!</p>
     </div>
+
     <div class="team-grid reveal">
-      <div class="team-card hover-target">
+      <div class="team-card hover-target" data-name="Anwesha Ganji" data-role="Founder & CEO" data-avatar="AG"
+        data-color="var(--gradient-hero)" data-text="#fff"
+        data-story="Anwesha started Swapifhy because she believed that learning shouldn't be lonely or expensive. She envisioned a world where teenagers could just build together. When she isn't strategizing the next big move for Swapifhy, you can find her diving down random late-night rabbit holes.">
         <div class="team-avatar">AG</div>
         <h3>Anwesha Ganji</h3>
         <p>Founder & CEO</p>
       </div>
-      <div class="team-card hover-target">
+
+      <div class="team-card hover-target" data-name="Aditya Sinha" data-role="Chief Operations Officer (COO)"
+        data-avatar="AS" data-color="var(--swap-lavender)" data-text="#000"
+        data-story="Aditya is the glue that holds the chaos together. He makes sure ideas don't just stay ideas, turning wild concepts into executing systems. A master at project management and keeping everyone on track.">
         <div class="team-avatar" style="background: var(--swap-lavender); color: #000;">AS</div>
         <h3>Aditya Sinha</h3>
         <p>Chief Operations Officer (COO)</p>
       </div>
-      <div class="team-card hover-target">
+
+      <div class="team-card hover-target" data-name="Falak Yadav" data-role="Co Founder & CTO" data-avatar="FY"
+        data-color="linear-gradient(135deg, #FFD96A, #FFB3D9)" data-text="#fff"
+        data-story="Falak bridges the gap between massive creative vision and the tough technical reality. As CTO, he maps out the architecture that lets Swapifhy handle all the crazy co-creation magic seamlessly.">
         <div class="team-avatar" style="background: linear-gradient(135deg, #FFD96A, #FFB3D9);">FY</div>
         <h3>Falak Yadav</h3>
         <p>Co Founder & CTO</p>
       </div>
-      <div class="team-card hover-target">
+
+      <div class="team-card hover-target" data-name="Aditya Raj Tiwari" data-role="Tech Developer" data-avatar="AT"
+        data-color="linear-gradient(135deg, #8EB9FF, #FFD96A)" data-text="#fff"
+        data-story="The code wizard. Aditya Raj turns coffee into components. Whether it's crushing bugs or building out the matchmaking algorithm that helps you find your perfect swap, he is the engine under the hood.">
         <div class="team-avatar" style="background: linear-gradient(135deg, #8EB9FF, #FFD96A);">AT</div>
         <h3>Aditya Raj Tiwari</h3>
         <p>Tech Developer</p>
       </div>
-      <div class="team-card hover-target">
+
+      <div class="team-card hover-target" data-name="Ritvik Nayak" data-role="Web Developer" data-avatar="RN"
+        data-color="linear-gradient(135deg, var(--swap-blue), var(--swap-lavender))" data-text="#fff"
+        data-story="Ritvik is the front-end artist who ensures every pixel on Swapifhy looks buttery smooth. He's obsessed with UI/UX, micro-interactions, and making sure you enjoy simply clicking around the site.">
+        <div class="team-avatar" style="background: linear-gradient(135deg, var(--swap-blue), var(--swap-lavender));">RN
+        </div>
+        <h3>Ritvik Nayak</h3>
+        <p>Web Developer</p>
+      </div>
+
+      <div class="team-card hover-target" data-name="Alankrita Sharma" data-role="Marketing Head" data-avatar="AS"
+        data-color="linear-gradient(135deg, #D6C4FF, #8EB9FF)" data-text="#fff"
+        data-story="Alankrita makes sure the world knows about Swapifhy. She knows exactly how to tell our story, run campaigns, and build hype. If you found us on social media, you have Alankrita to thank for it.">
         <div class="team-avatar" style="background: linear-gradient(135deg, #D6C4FF, #8EB9FF);">AS</div>
         <h3>Alankrita Sharma</h3>
         <p>Marketing Head</p>
       </div>
-      <div class="team-card hover-target">
+
+      <div class="team-card hover-target" data-name="Anushka Bhagat" data-role="Creative Director" data-avatar="AB"
+        data-color="var(--swap-pink)" data-text="#fff"
+        data-story="Anushka is the visionary behind Swapifhy's aesthetic. She curates the vibe, the brand colors, and the entire visual language that makes the platform feel like an experience rather than a boring tool.">
         <div class="team-avatar" style="background: var(--swap-pink);">AB</div>
         <h3>Anushka Bhagat</h3>
         <p>Creative Director</p>
       </div>
-      <div class="team-card hover-target">
+
+      <div class="team-card hover-target" data-name="Alia Gupta" data-role="Creative Strategist" data-avatar="AG"
+        data-color="var(--swap-gold)" data-text="#000"
+        data-story="Alia brings the big-picture creative ideas down to earth. She figures out the 'why' behind our visuals and interactions, ensuring every creative move aligns perfectly with the community's needs.">
         <div class="team-avatar" style="background: var(--swap-gold); color: #000;">AG</div>
         <h3>Alia Gupta</h3>
         <p>Creative Strategist</p>
       </div>
+
     </div>
   </section>
 
@@ -282,8 +283,8 @@
     <h2>Ready to start swapping skills<br>and learning like never before?</h2>
     <p class="cta-quote">"We're not another AI learning platform. We're that group chat where someone says, 'bro what if
       we built this?' and you actually do."</p>
-    <button class="btn-gradient hover-target magnetic" style="padding: 18px 48px; font-size: 1.2rem;"><span>Count me in
-        — Join the Waitlist</span></button>
+    <button class="btn-gradient hover-target magnetic" style="padding: 18px 48px; font-size: 1.2rem;"
+      onclick="window.scrollTo({top:0, behavior:'smooth'})"><span>Count me in — Join the Waitlist</span></button>
   </section>
 
   <footer>
@@ -292,27 +293,31 @@
         <div class="logo" style="margin-bottom: 16px;"><span class="logo-mark"></span> Swapifhy</div>
         <p>Built by students, powered by passion, fueled by creativity.</p>
       </div>
-
       <div class="footer-col">
         <h4>Join Our Team</h4>
-        <p>Want to help build the future of co-creation?</p>
-        <a href="https://tally.so/r/Ek5KZr" target="_blank" class="hover-target"
-          style="color: var(--swap-blue); font-weight: bold; margin-top: 8px;">Apply on Tally ↗</a>
+        <p>Want to help build the future of co-creation?</p><a href="https://tally.so/r/Ek5KZr" target="_blank"
+          class="hover-target" style="color: var(--swap-blue); font-weight: bold; margin-top: 8px;">Apply on Tally ↗</a>
       </div>
-
       <div class="footer-col">
-        <h4>Contact Us</h4>
-        <a href="mailto:swapifhy@gmail.com" class="hover-target">swapifhy@gmail.com</a>
-        <a href="mailto:anwesha.ganji@gmail.com" class="hover-target">Contact Founder: anwesha.ganji@gmail.com</a>
-        <a href="#" class="hover-target" style="color: var(--swap-pink); font-weight: bold; margin-top: 8px;">Book a
+        <h4>Contact Us</h4><a href="mailto:swapifhy@gmail.com" class="hover-target">swapifhy@gmail.com</a><a
+          href="mailto:anwesha.ganji@gmail.com" class="hover-target">Contact Founder: anwesha.ganji@gmail.com</a><a
+          href="#" class="hover-target" style="color: var(--swap-pink); font-weight: bold; margin-top: 8px;">Book a
           1-on-1 Call (Calendly) ↗</a>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2026 Swapifhy. Trade knowledge, not cash.</p>
     </div>
   </footer>
+
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <div class="team-sidebar" id="team-sidebar">
+    <button class="close-sidebar hover-target" id="close-sidebar">✕</button>
+    <div class="sidebar-avatar" id="sidebar-avatar"></div>
+    <h3 id="sidebar-name">Name</h3>
+    <p class="sidebar-role" id="sidebar-role">Role</p>
+    <div class="sidebar-story" id="sidebar-story">Story goes here...</div>
+  </div>
 
   <script src="script.js"></script>
 </body>
