@@ -7,7 +7,317 @@
   <title>Swapifhy | The Trustworthy Skill Exchange</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ================= SWAPIFHY BRAND VARIABLES ================= */
+    :root {
+      --swap-blue: #8EB9FF;
+      --swap-blue-hover: #76A4F5;
+      --swap-blue-active: #5A8ADE;
+      --swap-lavender: #D6C4FF;
+      --swap-pink: #FFB3D9;
+      --swap-gold: #FFD96A;
+
+      --text-primary: #111111;
+      --text-muted: #666666;
+      --bg-color: #F8F7FA;
+      --surface-color: #FFFFFF;
+      --border-color: #E2DFEB;
+
+      --gradient-hero: linear-gradient(135deg, #FFB3D9, #D6C4FF, #8EB9FF);
+      --gradient-btn: linear-gradient(90deg, #8EB9FF, #D6C4FF);
+      --shadow-soft: 0 20px 40px -10px rgba(142, 185, 255, 0.15);
+      --glass-bg: rgba(255, 255, 255, 0.6);
+    }
+
+    body.dark-mode {
+      --text-primary: #FDFBFF;
+      --text-muted: #A39BAF;
+      --bg-color: #0F0C13;
+      --surface-color: #191520;
+      --border-color: #2D2636;
+      --swap-blue: #9BC4FF;
+      --swap-lavender: #E1D4FF;
+      --swap-pink: #FFC1E4;
+      --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+      --glass-bg: rgba(25, 21, 32, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (pointer: fine) {
+      * { cursor: none !important; }
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      transition: background-color 0.5s ease, color 0.5s ease;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ================= BACKGROUNDS ================= */
+    .grid-bg {
+      position: fixed; inset: 0; z-index: -1;
+      background-image: radial-gradient(var(--border-color) 1.5px, transparent 1.5px);
+      background-size: 32px 32px; transition: background-image 0.5s ease;
+    }
+
+    .mouse-glow {
+      position: fixed; top: 0; left: 0; width: 800px; height: 800px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(142, 185, 255, 0.1) 0%, transparent 60%);
+      pointer-events: none; z-index: -1; will-change: transform;
+    }
+
+    body.dark-mode .mouse-glow { background: radial-gradient(circle, rgba(214, 196, 255, 0.08) 0%, transparent 60%); }
+
+    .ambient-mesh { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+    .mesh-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.5; animation: floatOrb 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); }
+    .orb-blue { width: 45vw; height: 45vw; background: var(--swap-blue); top: -10%; left: -10%; }
+    .orb-pink { width: 35vw; height: 35vw; background: var(--swap-pink); bottom: -10%; right: -5%; animation-delay: -5s; }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(5vw, 8vh) scale(1.1); }
+    }
+
+    /* ================= CURSOR ================= */
+    .cursor-dot, .cursor-ring {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%); will-change: transform, width, height;
+    }
+    .cursor-dot { width: 6px; height: 6px; background: var(--text-primary); border-radius: 50%; transition: background 0.2s, opacity 0.2s; }
+    .cursor-ring { width: 36px; height: 36px; border: 1.5px solid var(--swap-lavender); border-radius: 50%; transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease; }
+    
+    body.hovering .cursor-dot { opacity: 0; }
+    body.hovering .cursor-ring { width: 60px; height: 60px; background: rgba(142, 185, 255, 0.15); border-color: var(--swap-blue); backdrop-filter: blur(2px); }
+
+    /* ================= HEADER & NAV ================= */
+    header {
+      display: flex; justify-content: space-between; align-items: center; padding: 24px 5%;
+      position: fixed; width: 100%; top: 0; z-index: 100; transition: all 0.4s ease; transform: translateY(-100%);
+    }
+    body.loaded header { transform: translateY(0); }
+    header.scrolled { padding: 16px 5%; background: var(--glass-bg); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); }
+
+    .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+    .logo-mark { width: 24px; height: 24px; border-radius: 6px; background: var(--gradient-hero); animation: spinLogo 12s linear infinite; }
+    @keyframes spinLogo { 100% { transform: rotate(360deg); } }
+
+    nav { display: flex; gap: 32px; align-items: center; }
+    nav a { text-decoration: none; color: var(--text-primary); font-weight: 500; font-size: 0.95rem; position: relative; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 100%; height: 2px; background: var(--gradient-btn); transform: scaleX(0); transform-origin: right; transition: transform 0.4s; }
+    nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+    .theme-switch { width: 54px; height: 28px; background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 30px; display: flex; align-items: center; padding: 3px; transition: 0.4s; }
+    .theme-switch .knob { width: 20px; height: 20px; background: var(--gradient-hero); border-radius: 50%; transition: 0.4s; }
+    body.dark-mode .theme-switch .knob { transform: translateX(26px); }
+
+    .btn-gradient {
+      background: var(--gradient-btn); color: #fff; border: none; padding: 12px 28px; border-radius: 30px; font-weight: 600; font-size: 0.95rem;
+      box-shadow: 0 8px 20px rgba(142, 185, 255, 0.25); position: relative; overflow: hidden; display: inline-flex; cursor: none; text-decoration: none;
+    }
+    .btn-gradient::before { content: ''; position: absolute; inset: 0; background: var(--gradient-hero); opacity: 0; transition: opacity 0.4s ease; z-index: 0; }
+    .btn-gradient span { position: relative; z-index: 1; pointer-events: none; }
+    .btn-gradient:hover::before { opacity: 1; }
+    .btn-gradient:hover { box-shadow: 0 12px 28px rgba(214, 196, 255, 0.4); transform: translateY(-2px); }
+
+    /* ================= SHARED LAYOUT ================= */
+    section { padding: 120px 5%; position: relative; z-index: 10; max-width: 1400px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 80px; }
+    .section-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700; margin-bottom: 16px; }
+    .section-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+    .text-gradient { background: var(--gradient-hero); -webkit-background-clip: text; color: transparent; }
+
+    /* ================= HERO & WAITLIST ================= */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+    
+    .floating-emoji { position: absolute; z-index: 0; opacity: 0.8; filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1)); animation: floatEmoji 6s ease-in-out infinite; pointer-events: none; user-select: none; }
+    @keyframes floatEmoji { 0%, 100% { transform: translateY(0) rotate(0deg) scale(1); } 50% { transform: translateY(-20px) rotate(10deg) scale(1.05); } }
+    .emoji-1 { top: 20%; left: 10%; font-size: 4rem; animation-delay: 0s; }
+    .emoji-2 { top: 25%; right: 12%; font-size: 3.5rem; animation-delay: -2s; }
+    .emoji-3 { bottom: 25%; left: 15%; font-size: 3rem; animation-delay: -4s; }
+    .emoji-4 { bottom: 30%; right: 18%; font-size: 4.5rem; animation-delay: -1s; }
+    .emoji-5 { top: 15%; right: 35%; font-size: 2.5rem; animation-delay: -3s; }
+    .emoji-6 { bottom: 15%; left: 35%; font-size: 2.8rem; animation-delay: -5s; }
+
+    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%; }
+    
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--surface-color);
+      border: 1px solid var(--border-color); border-radius: 20px; font-weight: 600; color: var(--swap-blue-active);
+      box-shadow: var(--shadow-soft); margin-bottom: 24px; opacity: 0; transform: translateY(20px); transition: 0.8s 0.3s;
+    }
+    body.loaded .badge { opacity: 1; transform: translateY(0); }
+    .badge-dot { width: 6px; height: 6px; background: var(--swap-gold); border-radius: 50%; box-shadow: 0 0 8px var(--swap-gold); animation: blink 2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .hero h1 { font-size: clamp(2.5rem, 5.5vw, 5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; max-width: 900px; margin-bottom: 24px; opacity: 0; transform: translateY(20px); transition: 0.8s 0.4s; }
+    body.loaded .hero h1 { opacity: 1; transform: translateY(0); }
+    .hero p { font-size: clamp(1rem, 2vw, 1.25rem); max-width: 600px; line-height: 1.6; color: var(--text-muted); margin-bottom: 48px; opacity: 0; transform: translateY(20px); transition: 0.8s 0.5s; font-weight: 500; }
+    body.loaded .hero p { opacity: 1; transform: translateY(0); }
+
+    .waitlist-container { width: 100%; max-width: 500px; height: 120px; position: relative; display: flex; justify-content: center; }
+
+    .waitlist-wrapper {
+      background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 50px; padding: 6px 6px 6px 24px;
+      box-shadow: var(--shadow-soft); display: flex; width: 100%; align-items: center; opacity: 0; transform: translateY(20px); transition: 0.8s 0.6s; position: absolute; top: 0;
+    }
+    body.loaded .waitlist-wrapper { opacity: 1; transform: translateY(0); }
+    .waitlist-wrapper input { flex: 1; border: none; font-size: 1rem; background: transparent; outline: none; color: var(--text-primary); padding-right: 16px; }
+    .waitlist-wrapper input::placeholder { color: var(--text-muted); font-weight: 300; }
+    .waitlist-wrapper .btn-gradient { padding: 14px 28px; }
+
+    /* New Waitlist Animations */
+    .waitlist-success {
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      animation: slideUpFade 0.6s ease forwards; position: absolute; top: 0; width: 100%;
+    }
+    .success-badge {
+      background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--swap-gold); padding: 12px 24px;
+      border-radius: 16px; display: flex; align-items: center; gap: 16px; box-shadow: 0 0 30px rgba(255, 217, 106, 0.2);
+      transform: scale(0); animation: popInBadge 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s forwards;
+    }
+    .badge-icon { font-size: 2rem; }
+    .badge-text { text-align: left; display: flex; flex-direction: column; }
+    .badge-text strong { color: var(--text-primary); font-size: 1.1rem; }
+    .badge-text span { color: var(--swap-gold); font-size: 0.9rem; font-weight: 600; }
+
+    .linkedin-flex-btn {
+      background: #0a66c2; color: white; text-decoration: none; padding: 12px 28px; border-radius: 30px;
+      font-weight: 600; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 8px 20px rgba(10, 102, 194, 0.3); transition: all 0.3s; opacity: 0; transform: translateY(20px);
+      animation: slideUpFade 0.6s 0.5s forwards; border: 2px solid transparent; cursor: none;
+    }
+    .linkedin-flex-btn:hover { box-shadow: 0 12px 28px rgba(10, 102, 194, 0.5); transform: translateY(-3px); border-color: rgba(255,255,255,0.4); }
+
+    @keyframes popInBadge { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+    @keyframes slideUpFade { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+    /* ================= MARQUEE ================= */
+    .marquee-section { padding: 24px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); background: var(--glass-bg); backdrop-filter: blur(10px); overflow: hidden; display: flex; white-space: nowrap; transform: rotate(-2deg) scale(1.05); box-shadow: var(--shadow-soft); position: relative; z-index: 10; }
+    .marquee-inner { display: flex; gap: 40px; animation: scrollMarquee 25s linear infinite; }
+    .marquee-inner span { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: transparent; -webkit-text-stroke: 1px var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 40px; transition: 0.3s; }
+    .marquee-inner span:hover { color: var(--swap-blue); -webkit-text-stroke: 0px; }
+    .marquee-inner span::after { content: '✦'; font-size: 1.2rem; color: var(--swap-pink); -webkit-text-stroke: 0px; }
+    @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ================= WHAT IS SWAPIFHY ================= */
+    .intro-text { text-align: center; max-width: 800px; margin: 0 auto 60px; font-size: 1.2rem; line-height: 1.8; color: var(--text-muted); }
+    .intro-text strong { color: var(--text-primary); }
+    .math-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px; }
+    .math-card { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: var(--shadow-soft); transition: transform 0.4s; font-weight: 600; font-size: 1.1rem; }
+    .math-card:hover { transform: translateY(-5px); border-color: var(--swap-blue); }
+    .math-pill { padding: 8px 16px; background: var(--bg-color); border-radius: 30px; border: 1px solid var(--border-color); }
+    .math-symbol { color: var(--swap-pink); font-weight: bold; }
+    .math-result { background: var(--gradient-btn); -webkit-background-clip: text; color: transparent; font-weight: 700; }
+
+    /* ================= GLARE CARDS ================= */
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; perspective: 1000px; }
+    .glare-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--border-color); padding: 48px 40px; border-radius: 24px; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.1s ease-out, border-color 0.4s; }
+    .glare-card.reset { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important; transform: rotateX(0) rotateY(0) translateY(0) scale(1) !important; }
+    .glare { position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 60%); opacity: 0; pointer-events: none; transition: opacity 0.3s; mix-blend-mode: overlay; z-index: 5; }
+    body.dark-mode .glare { background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%); }
+    .glare-card:hover { border-color: var(--swap-lavender); z-index: 2; }
+    .glare-card:hover .glare { opacity: 1; }
+    .card-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--bg-color); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 24px; border: 1px solid var(--border-color); position: relative; z-index: 2; transition: transform 0.5s; }
+    .glare-card:hover .card-icon { transform: scale(1.15) rotate(-5deg); border-color: var(--swap-blue); }
+    .glare-card h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 600; position: relative; z-index: 2; }
+    .glare-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; position: relative; z-index: 2; }
+
+    /* ================= HOW IT WORKS ================= */
+    .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--gradient-btn); transform: translateX(-50%); opacity: 0.3; }
+    .timeline-step { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; position: relative; }
+    .timeline-step:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-content { width: 45%; background: var(--surface-color); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: var(--shadow-soft); transition: transform 0.4s; }
+    .timeline-content:hover { transform: translateY(-10px); border-color: var(--swap-blue); }
+    .timeline-content h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--swap-blue-active); }
+    .timeline-content p { color: var(--text-muted); line-height: 1.5; }
+    .timeline-dot { width: 50px; height: 50px; background: var(--surface-color); border: 4px solid var(--swap-pink); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; z-index: 2; }
+    .timeline-footer-quote { text-align: center; margin-top: 60px; font-size: 1.2rem; font-style: italic; color: var(--swap-blue-active); font-weight: 600; }
+
+    /* ================= TEAM ================= */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; justify-items: center; }
+    .team-card { text-align: center; transition: transform 0.3s; }
+    .team-card:hover { transform: translateY(-5px); }
+    .team-avatar { width: 120px; height: 120px; border-radius: 50%; background: var(--gradient-hero); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white; font-weight: 700; box-shadow: var(--shadow-soft); border: 4px solid var(--surface-color); transition: transform 0.4s; }
+    .team-card:hover .team-avatar { transform: scale(1.1) rotate(5deg); box-shadow: 0 15px 30px rgba(142,185,255,0.4); }
+    .team-card h3 { font-size: 1.2rem; margin-bottom: 4px; }
+    .team-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* ================= TEAM SIDEBAR ================= */
+    .sidebar-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999;
+      opacity: 0; pointer-events: none; transition: 0.4s; backdrop-filter: blur(4px);
+    }
+    .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+
+    .team-sidebar {
+      position: fixed; top: 0; right: -450px; width: 100%; max-width: 400px; height: 100vh;
+      background: var(--surface-color); z-index: 1000; box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+      transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1); padding: 60px 40px; overflow-y: auto;
+      border-left: 1px solid var(--border-color);
+    }
+    body.dark-mode .team-sidebar { box-shadow: -10px 0 40px rgba(0,0,0,0.5); }
+    .team-sidebar.active { right: 0; }
+
+    .close-sidebar {
+      position: absolute; top: 24px; right: 24px; background: var(--bg-color); border: 1px solid var(--border-color);
+      color: var(--text-primary); width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center; transition: 0.3s;
+    }
+    .close-sidebar:hover { background: var(--swap-pink); color: #111; border-color: transparent; }
+
+    .sidebar-avatar {
+      width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 24px; display: flex;
+      align-items: center; justify-content: center; font-size: 3rem; font-weight: 700;
+      box-shadow: var(--shadow-soft); border: 4px solid var(--bg-color);
+    }
+    .team-sidebar h3 { text-align: center; font-size: 1.8rem; margin-bottom: 8px; }
+    .sidebar-role { text-align: center; color: var(--swap-blue-active); font-weight: 600; margin-bottom: 32px; font-size: 1.1rem; }
+    .sidebar-story { color: var(--text-muted); line-height: 1.8; font-size: 1.05rem; }
+
+
+    /* ================= FOOTER / CTA ================= */
+    .cta-section { text-align: center; padding: 100px 5%; background: var(--glass-bg); border-top: 1px solid var(--border-color); }
+    .cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+    .cta-quote { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; font-style: italic; }
+    
+    footer { border-top: 1px solid var(--border-color); padding: 60px 5% 40px; background: var(--surface-color); }
+    .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; max-width: 1200px; margin: 0 auto; margin-bottom: 40px; }
+    .footer-col h4 { font-size: 1.2rem; margin-bottom: 16px; color: var(--swap-blue-active); }
+    .footer-col p, .footer-col a { color: var(--text-muted); line-height: 1.8; text-decoration: none; display: block; transition: color 0.3s; }
+    .footer-col a:hover { color: var(--swap-pink); }
+    .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Reveal Animations */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-50px); transition: all 0.8s; }
+    .reveal-left.active { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(50px); transition: all 0.8s; }
+    .reveal-right.active { opacity: 1; transform: translateX(0); }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .timeline::before { left: 20px; }
+      .timeline-step { flex-direction: column !important; align-items: flex-end; }
+      .timeline-content { width: calc(100% - 60px); }
+      .timeline-dot { left: 20px; transform: translateX(-50%); }
+      .floating-emoji { display: none; }
+    }
+  </style>
 </head>
 
 <body class="loaded">
@@ -47,12 +357,10 @@
     <div class="floating-emoji emoji-6">✍️</div>
 
     <div class="hero-content">
-      <div class="badge hover-target magnetic"><span class="badge-dot"></span> I made this a placeholder we can replace
-        with upcoming events</div>
-      <h1>Learn <span class="text-gradient">with</span> people —<br>not <span class="text-gradient">from</span> them.
-      </h1>
+      <div class="badge hover-target magnetic"><span class="badge-dot"></span> I made this a placeholder we can replace with upcoming events</div>
+      <h1>Learn <span class="text-gradient">with</span> people —<br>not <span class="text-gradient">from</span> them.</h1>
       <p>No more lonely tutorials. No more awkward 'teach me' DMs.<br>Create. Connect. Build. Repeat.</p>
-
+      
       <div class="waitlist-container">
         <div class="waitlist-wrapper hover-target" id="waitlist-form">
           <input type="email" id="email-input" placeholder="Enter your email to join the waitlist...">
@@ -67,12 +375,8 @@
               <span>Swapifhy Waitlist</span>
             </div>
           </div>
-          <a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20secured%20my%20spot%20as%20a%20Founding%20Member%20on%20Swapifhy!%20%E2%9C%A8%0A%0AThe%20platform%20where%20creators%20swap%20skills%20to%20build%20cool%20things%20together.%20Come%20join%20the%20waitlist!%20%23Swapifhy"
-            target="_blank" class="linkedin-flex-btn magnetic hover-target">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-            </svg>
+          <a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20secured%20my%20spot%20as%20a%20Founding%20Member%20on%20Swapifhy!%20%E2%9C%A8%0A%0AThe%20platform%20where%20creators%20swap%20skills%20to%20build%20cool%20things%20together.%20Come%20join%20the%20waitlist!%20%23Swapifhy" target="_blank" class="linkedin-flex-btn magnetic hover-target">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             <span>Flex my badge on LinkedIn</span>
           </a>
         </div>
@@ -94,31 +398,16 @@
       <h2 class="section-title">What Is <span class="text-gradient">Swapifhy?</span></h2>
     </div>
     <div class="intro-text reveal">
-      <p>Swapifhy is a <strong>teen-led platform</strong> where people exchange skills instead of money. You can teach
-        someone guitar and learn video editing in return — building connections, creativity, and confidence along the
-        way.</p><br>
-      <p>Imagine if a skill-sharing app, a creative playground, and a group chat had a baby. <strong>That's us.</strong>
-      </p>
+      <p>Swapifhy is a <strong>teen-led platform</strong> where people exchange skills instead of money. You can teach someone guitar and learn video editing in return — building connections, creativity, and confidence along the way.</p><br>
+      <p>Imagine if a skill-sharing app, a creative playground, and a group chat had a baby. <strong>That's us.</strong></p>
     </div>
     <div class="math-grid reveal">
-      <div class="math-card hover-target"><span class="math-pill">Draw</span> <span class="math-symbol">+</span> <span
-          class="math-pill">Code</span> <span class="math-symbol">=</span> <span class="math-result">Animated
-          Short</span></div>
-      <div class="math-card hover-target"><span class="math-pill">Write</span> <span class="math-symbol">+</span> <span
-          class="math-pill">Design</span> <span class="math-symbol">=</span> <span class="math-result">Brand
-          Story</span></div>
-      <div class="math-card hover-target"><span class="math-pill">Sing</span> <span class="math-symbol">+</span> <span
-          class="math-pill">Edit</span> <span class="math-symbol">=</span> <span class="math-result">Music Video</span>
-      </div>
-      <div class="math-card hover-target"><span class="math-pill">Code</span> <span class="math-symbol">+</span> <span
-          class="math-pill">Market</span> <span class="math-symbol">=</span> <span class="math-result">Launch a
-          Product</span></div>
-      <div class="math-card hover-target"><span class="math-pill">Illustrate</span> <span class="math-symbol">+</span>
-        <span class="math-pill">Write</span> <span class="math-symbol">=</span> <span class="math-result">Comic
-          Book</span></div>
-      <div class="math-card hover-target"><span class="math-pill">Act</span> <span class="math-symbol">+</span> <span
-          class="math-pill">Direct</span> <span class="math-symbol">=</span> <span class="math-result">Short Film</span>
-      </div>
+      <div class="math-card hover-target"><span class="math-pill">Draw</span> <span class="math-symbol">+</span> <span class="math-pill">Code</span> <span class="math-symbol">=</span> <span class="math-result">Animated Short</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Write</span> <span class="math-symbol">+</span> <span class="math-pill">Design</span> <span class="math-symbol">=</span> <span class="math-result">Brand Story</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Sing</span> <span class="math-symbol">+</span> <span class="math-pill">Edit</span> <span class="math-symbol">=</span> <span class="math-result">Music Video</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Code</span> <span class="math-symbol">+</span> <span class="math-pill">Market</span> <span class="math-symbol">=</span> <span class="math-result">Launch a Product</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Illustrate</span> <span class="math-symbol">+</span> <span class="math-pill">Write</span> <span class="math-symbol">=</span> <span class="math-result">Comic Book</span></div>
+      <div class="math-card hover-target"><span class="math-pill">Act</span> <span class="math-symbol">+</span> <span class="math-pill">Direct</span> <span class="math-symbol">=</span> <span class="math-result">Short Film</span></div>
     </div>
   </section>
 
@@ -128,37 +417,29 @@
     </div>
     <div class="cards-grid">
       <div class="glare-card hover-target reveal">
-        <div class="glare"></div>
-        <div class="card-icon">👥</div>
+        <div class="glare"></div><div class="card-icon">👥</div>
         <h3>Build Around Humans, Not Algorithms</h3>
-        <p>We're community-first. Real people. Real connections. No random matches — just genuine creative chemistry.
-        </p>
+        <p>We're community-first. Real people. Real connections. No random matches — just genuine creative chemistry.</p>
       </div>
       <div class="glare-card hover-target reveal" style="transition-delay: 0.1s;">
-        <div class="glare"></div>
-        <div class="card-icon">✨</div>
+        <div class="glare"></div><div class="card-icon">✨</div>
         <h3>It's an Experience, Not an App</h3>
-        <p>Every swap feels like an adventure. You'll laugh, fail, brainstorm, and maybe even start your next big thing.
-        </p>
+        <p>Every swap feels like an adventure. You'll laugh, fail, brainstorm, and maybe even start your next big thing.</p>
       </div>
       <div class="glare-card hover-target reveal" style="transition-delay: 0.2s;">
-        <div class="glare"></div>
-        <div class="card-icon">🚀</div>
+        <div class="glare"></div><div class="card-icon">🚀</div>
         <h3>Learn - Build - Launch</h3>
         <p>You don't just learn here. You create. That's what makes it magic.</p>
       </div>
       <div class="glare-card hover-target reveal" style="transition-delay: 0.3s;">
-        <div class="glare"></div>
-        <div class="card-icon">💫</div>
+        <div class="glare"></div><div class="card-icon">💫</div>
         <h3>Zero Money Exchange</h3>
         <p>Your skills are the currency. No payments, no fees — just pure knowledge exchange.</p>
       </div>
     </div>
     <div class="reveal" style="text-align: center; margin-top: 60px;">
-      <h3 style="color: var(--swap-pink); font-size: 1.5rem; margin-bottom: 16px;">✦ And Yeah... There's More Coming. ✦
-      </h3>
-      <p style="color: var(--text-muted); font-size: 1.1rem;">Surprise projects. Collabs. Secret challenges.<br>The kind
-        of stuff you'll want to say, "I was there first."</p>
+      <h3 style="color: var(--swap-pink); font-size: 1.5rem; margin-bottom: 16px;">✦ And Yeah... There's More Coming. ✦</h3>
+      <p style="color: var(--text-muted); font-size: 1.1rem;">Surprise projects. Collabs. Secret challenges.<br>The kind of stuff you'll want to say, "I was there first."</p>
     </div>
   </section>
 
@@ -170,28 +451,24 @@
       <div class="timeline-step reveal-left">
         <div class="timeline-dot">🎴</div>
         <div class="timeline-content hover-target">
-          <h3>Step 1: Make your skill card</h3>
-          <p>Highlight what you're great at and what you want to learn.</p>
+          <h3>Step 1: Make your skill card</h3><p>Highlight what you're great at and what you want to learn.</p>
         </div>
       </div>
       <div class="timeline-step reveal-right">
         <div class="timeline-dot">🤝</div>
         <div class="timeline-content hover-target">
-          <h3>Step 2: Find your creative match</h3>
-          <p>Connect with peers who perfectly complement your goals.</p>
+          <h3>Step 2: Find your creative match</h3><p>Connect with peers who perfectly complement your goals.</p>
         </div>
       </div>
       <div class="timeline-step reveal-left">
         <div class="timeline-dot">🚀</div>
         <div class="timeline-content hover-target">
-          <h3>Step 3: Build something wild together</h3>
-          <p>You teach. They teach. You both build.</p>
+          <h3>Step 3: Build something wild together</h3><p>You teach. They teach. You both build.</p>
         </div>
       </div>
     </div>
     <div class="timeline-footer-quote reveal">
-      <p>Somewhere in that chaos — ideas are born, friendships happen, and projects come to life.<br><br><span
-          style="color: var(--swap-pink); font-size: 1.5rem;">"Not just skill-swapping. Soul-swapping."</span></p>
+      <p>Somewhere in that chaos — ideas are born, friendships happen, and projects come to life.<br><br><span style="color: var(--swap-pink); font-size: 1.5rem;">"Not just skill-swapping. Soul-swapping."</span></p>
     </div>
   </section>
 
@@ -208,71 +485,46 @@
       <h2 class="section-title">Meet Our <span class="text-gradient">Team</span></h2>
       <p class="section-subtitle">Click on a team member to read their story!</p>
     </div>
-
+    
     <div class="team-grid reveal">
-      <div class="team-card hover-target" data-name="Anwesha Ganji" data-role="Founder & CEO" data-avatar="AG"
-        data-color="var(--gradient-hero)" data-text="#fff"
-        data-story="Anwesha started Swapifhy because she believed that learning shouldn't be lonely or expensive. She envisioned a world where teenagers could just build together. When she isn't strategizing the next big move for Swapifhy, you can find her diving down random late-night rabbit holes.">
+      <div class="team-card hover-target" data-name="Anwesha Ganji" data-role="Founder & CEO" data-avatar="AG" data-color="var(--gradient-hero)" data-text="#fff" data-story="Anwesha started Swapifhy because she believed that learning shouldn't be lonely or expensive. She envisioned a world where teenagers could just build together. When she isn't strategizing the next big move for Swapifhy, you can find her diving down random late-night rabbit holes.">
         <div class="team-avatar">AG</div>
-        <h3>Anwesha Ganji</h3>
-        <p>Founder & CEO</p>
+        <h3>Anwesha Ganji</h3><p>Founder & CEO</p>
       </div>
 
-      <div class="team-card hover-target" data-name="Aditya Sinha" data-role="Chief Operations Officer (COO)"
-        data-avatar="AS" data-color="var(--swap-lavender)" data-text="#000"
-        data-story="Aditya is the glue that holds the chaos together. He makes sure ideas don't just stay ideas, turning wild concepts into executing systems. A master at project management and keeping everyone on track.">
+      <div class="team-card hover-target" data-name="Aditya Sinha" data-role="Chief Operations Officer (COO)" data-avatar="AS" data-color="var(--swap-lavender)" data-text="#000" data-story="Aditya is the glue that holds the chaos together. He makes sure ideas don't just stay ideas, turning wild concepts into executing systems. A master at project management and keeping everyone on track.">
         <div class="team-avatar" style="background: var(--swap-lavender); color: #000;">AS</div>
-        <h3>Aditya Sinha</h3>
-        <p>Chief Operations Officer (COO)</p>
+        <h3>Aditya Sinha</h3><p>Chief Operations Officer (COO)</p>
       </div>
 
-      <div class="team-card hover-target" data-name="Falak Yadav" data-role="Co Founder & CTO" data-avatar="FY"
-        data-color="linear-gradient(135deg, #FFD96A, #FFB3D9)" data-text="#fff"
-        data-story="Falak bridges the gap between massive creative vision and the tough technical reality. As CTO, he maps out the architecture that lets Swapifhy handle all the crazy co-creation magic seamlessly.">
+      <div class="team-card hover-target" data-name="Falak Yadav" data-role="Co Founder & CTO" data-avatar="FY" data-color="linear-gradient(135deg, #FFD96A, #FFB3D9)" data-text="#fff" data-story="Falak bridges the gap between massive creative vision and the tough technical reality. As CTO, he maps out the architecture that lets Swapifhy handle all the crazy co-creation magic seamlessly.">
         <div class="team-avatar" style="background: linear-gradient(135deg, #FFD96A, #FFB3D9);">FY</div>
-        <h3>Falak Yadav</h3>
-        <p>Co Founder & CTO</p>
+        <h3>Falak Yadav</h3><p>Co Founder & CTO</p>
       </div>
 
-      <div class="team-card hover-target" data-name="Aditya Raj Tiwari" data-role="Tech Developer" data-avatar="AT"
-        data-color="linear-gradient(135deg, #8EB9FF, #FFD96A)" data-text="#fff"
-        data-story="The code wizard. Aditya Raj turns coffee into components. Whether it's crushing bugs or building out the matchmaking algorithm that helps you find your perfect swap, he is the engine under the hood.">
+      <div class="team-card hover-target" data-name="Aditya Raj Tiwari" data-role="Tech Developer" data-avatar="AT" data-color="linear-gradient(135deg, #8EB9FF, #FFD96A)" data-text="#fff" data-story="The code wizard. Aditya Raj turns coffee into components. Whether it's crushing bugs or building out the matchmaking algorithm that helps you find your perfect swap, he is the engine under the hood.">
         <div class="team-avatar" style="background: linear-gradient(135deg, #8EB9FF, #FFD96A);">AT</div>
-        <h3>Aditya Raj Tiwari</h3>
-        <p>Tech Developer</p>
+        <h3>Aditya Raj Tiwari</h3><p>Tech Developer</p>
+      </div>
+      
+      <div class="team-card hover-target" data-name="Ritvik Nayak" data-role="Web Developer" data-avatar="RN" data-color="linear-gradient(135deg, var(--swap-blue), var(--swap-lavender))" data-text="#fff" data-story="Ritvik is the front-end artist who ensures every pixel on Swapifhy looks buttery smooth. He's obsessed with UI/UX, micro-interactions, and making sure you enjoy simply clicking around the site.">
+        <div class="team-avatar" style="background: linear-gradient(135deg, var(--swap-blue), var(--swap-lavender));">RN</div>
+        <h3>Ritvik Nayak</h3><p>Web Developer</p>
       </div>
 
-      <div class="team-card hover-target" data-name="Ritvik Nayak" data-role="Web Developer" data-avatar="RN"
-        data-color="linear-gradient(135deg, var(--swap-blue), var(--swap-lavender))" data-text="#fff"
-        data-story="Ritvik is the front-end artist who ensures every pixel on Swapifhy looks buttery smooth. He's obsessed with UI/UX, micro-interactions, and making sure you enjoy simply clicking around the site.">
-        <div class="team-avatar" style="background: linear-gradient(135deg, var(--swap-blue), var(--swap-lavender));">RN
-        </div>
-        <h3>Ritvik Nayak</h3>
-        <p>Web Developer</p>
-      </div>
-
-      <div class="team-card hover-target" data-name="Alankrita Sharma" data-role="Marketing Head" data-avatar="AS"
-        data-color="linear-gradient(135deg, #D6C4FF, #8EB9FF)" data-text="#fff"
-        data-story="Alankrita makes sure the world knows about Swapifhy. She knows exactly how to tell our story, run campaigns, and build hype. If you found us on social media, you have Alankrita to thank for it.">
+      <div class="team-card hover-target" data-name="Alankrita Sharma" data-role="Marketing Head" data-avatar="AS" data-color="linear-gradient(135deg, #D6C4FF, #8EB9FF)" data-text="#fff" data-story="Alankrita makes sure the world knows about Swapifhy. She knows exactly how to tell our story, run campaigns, and build hype. If you found us on social media, you have Alankrita to thank for it.">
         <div class="team-avatar" style="background: linear-gradient(135deg, #D6C4FF, #8EB9FF);">AS</div>
-        <h3>Alankrita Sharma</h3>
-        <p>Marketing Head</p>
+        <h3>Alankrita Sharma</h3><p>Marketing Head</p>
       </div>
 
-      <div class="team-card hover-target" data-name="Anushka Bhagat" data-role="Creative Director" data-avatar="AB"
-        data-color="var(--swap-pink)" data-text="#fff"
-        data-story="Anushka is the visionary behind Swapifhy's aesthetic. She curates the vibe, the brand colors, and the entire visual language that makes the platform feel like an experience rather than a boring tool.">
+      <div class="team-card hover-target" data-name="Anushka Bhagat" data-role="Creative Director" data-avatar="AB" data-color="var(--swap-pink)" data-text="#fff" data-story="Anushka is the visionary behind Swapifhy's aesthetic. She curates the vibe, the brand colors, and the entire visual language that makes the platform feel like an experience rather than a boring tool.">
         <div class="team-avatar" style="background: var(--swap-pink);">AB</div>
-        <h3>Anushka Bhagat</h3>
-        <p>Creative Director</p>
+        <h3>Anushka Bhagat</h3><p>Creative Director</p>
       </div>
 
-      <div class="team-card hover-target" data-name="Alia Gupta" data-role="Creative Strategist" data-avatar="AG"
-        data-color="var(--swap-gold)" data-text="#000"
-        data-story="Alia brings the big-picture creative ideas down to earth. She figures out the 'why' behind our visuals and interactions, ensuring every creative move aligns perfectly with the community's needs.">
+      <div class="team-card hover-target" data-name="Alia Gupta" data-role="Creative Strategist" data-avatar="AG" data-color="var(--swap-gold)" data-text="#000" data-story="Alia brings the big-picture creative ideas down to earth. She figures out the 'why' behind our visuals and interactions, ensuring every creative move aligns perfectly with the community's needs.">
         <div class="team-avatar" style="background: var(--swap-gold); color: #000;">AG</div>
-        <h3>Alia Gupta</h3>
-        <p>Creative Strategist</p>
+        <h3>Alia Gupta</h3><p>Creative Strategist</p>
       </div>
 
     </div>
@@ -281,10 +533,8 @@
   <section id="join" class="cta-section reveal">
     <div class="badge hover-target magnetic" style="margin-bottom: 24px;">Before We Go Invite-Only</div>
     <h2>Ready to start swapping skills<br>and learning like never before?</h2>
-    <p class="cta-quote">"We're not another AI learning platform. We're that group chat where someone says, 'bro what if
-      we built this?' and you actually do."</p>
-    <button class="btn-gradient hover-target magnetic" style="padding: 18px 48px; font-size: 1.2rem;"
-      onclick="window.scrollTo({top:0, behavior:'smooth'})"><span>Count me in — Join the Waitlist</span></button>
+    <p class="cta-quote">"We're not another AI learning platform. We're that group chat where someone says, 'bro what if we built this?' and you actually do."</p>
+    <button class="btn-gradient hover-target magnetic" style="padding: 18px 48px; font-size: 1.2rem;" onclick="window.scrollTo({top:0, behavior:'smooth'})"><span>Count me in — Join the Waitlist</span></button>
   </section>
 
   <footer>
@@ -294,20 +544,13 @@
         <p>Built by students, powered by passion, fueled by creativity.</p>
       </div>
       <div class="footer-col">
-        <h4>Join Our Team</h4>
-        <p>Want to help build the future of co-creation?</p><a href="https://tally.so/r/Ek5KZr" target="_blank"
-          class="hover-target" style="color: var(--swap-blue); font-weight: bold; margin-top: 8px;">Apply on Tally ↗</a>
+        <h4>Join Our Team</h4><p>Want to help build the future of co-creation?</p><a href="https://tally.so/r/Ek5KZr" target="_blank" class="hover-target" style="color: var(--swap-blue); font-weight: bold; margin-top: 8px;">Apply on Tally ↗</a>
       </div>
       <div class="footer-col">
-        <h4>Contact Us</h4><a href="mailto:swapifhy@gmail.com" class="hover-target">swapifhy@gmail.com</a><a
-          href="mailto:anwesha.ganji@gmail.com" class="hover-target">Contact Founder: anwesha.ganji@gmail.com</a><a
-          href="#" class="hover-target" style="color: var(--swap-pink); font-weight: bold; margin-top: 8px;">Book a
-          1-on-1 Call (Calendly) ↗</a>
+        <h4>Contact Us</h4><a href="mailto:swapifhy@gmail.com" class="hover-target">swapifhy@gmail.com</a><a href="mailto:anwesha.ganji@gmail.com" class="hover-target">Contact Founder: anwesha.ganji@gmail.com</a><a href="#" class="hover-target" style="color: var(--swap-pink); font-weight: bold; margin-top: 8px;">Book a 1-on-1 Call (Calendly) ↗</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 Swapifhy. Trade knowledge, not cash.</p>
-    </div>
+    <div class="footer-bottom"><p>© 2026 Swapifhy. Trade knowledge, not cash.</p></div>
   </footer>
 
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -319,7 +562,157 @@
     <div class="sidebar-story" id="sidebar-story">Story goes here...</div>
   </div>
 
-  <script src="script.js"></script>
-</body>
+  <script>
+    // ================= DARK MODE TOGGLE =================
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => { document.body.classList.toggle('dark-mode'); });
 
+    // ================= SMOOTH CURSOR & GLOW PHYSICS =================
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorRing = document.querySelector('.cursor-ring');
+    const mouseGlow = document.querySelector('.mouse-glow');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let ringX = mouseX, ringY = mouseY, glowX = mouseX, glowY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursorDot.style.transform = `translate3d(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%), 0)`;
+    });
+
+    function renderPhysics() {
+      ringX += (mouseX - ringX) * 0.15; ringY += (mouseY - ringY) * 0.15;
+      glowX += (mouseX - glowX) * 0.05; glowY += (mouseY - glowY) * 0.05;
+      cursorRing.style.transform = `translate3d(calc(${ringX}px - 50%), calc(${ringY}px - 50%), 0)`;
+      mouseGlow.style.transform = `translate3d(calc(${glowX}px - 50%), calc(${glowY}px - 50%), 0)`;
+      requestAnimationFrame(renderPhysics);
+    }
+    renderPhysics();
+
+    function attachHoverEvents() {
+      document.querySelectorAll('.hover-target').forEach(target => {
+        target.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+        target.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+      });
+    }
+    attachHoverEvents();
+
+    // ================= MAGNETIC BUTTONS =================
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px) scale(1.05)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = `translate(0px, 0px) scale(1)`; });
+    });
+
+    // ================= 3D CARD GLARE =================
+    document.querySelectorAll('.glare-card').forEach(card => {
+      const glare = card.querySelector('.glare');
+      card.addEventListener('mousemove', (e) => {
+        card.classList.remove('reset');
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const centerX = rect.width / 2, centerY = rect.height / 2;
+        const isDark = document.body.classList.contains('dark-mode');
+        const glareColor = isDark ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.6)';
+        glare.style.background = `radial-gradient(circle at ${x}px ${y}px, ${glareColor} 0%, transparent 60%)`;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', () => { card.classList.add('reset'); glare.style.opacity = '0'; });
+    });
+
+    // ================= SCROLL NAV & REVEAL =================
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // ================= WAITLIST LOGIC & CONFETTI =================
+    const joinBtn = document.getElementById('join-btn');
+    const waitlistForm = document.getElementById('waitlist-form');
+    const waitlistSuccess = document.getElementById('waitlist-success');
+    const emailInput = document.getElementById('email-input');
+
+    joinBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if(emailInput.value.trim() === '') return; // Basic empty check
+
+      waitlistForm.style.display = 'none';
+      waitlistSuccess.style.display = 'flex';
+      createConfetti();
+    });
+
+    function createConfetti() {
+      const colors = ['#8EB9FF', '#FFB3D9', '#FFD96A', '#D6C4FF'];
+      for(let i=0; i<40; i++) {
+        const conf = document.createElement('div');
+        conf.style.position = 'fixed';
+        conf.style.width = Math.random() > 0.5 ? '8px' : '12px';
+        conf.style.height = conf.style.width;
+        conf.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+        conf.style.left = (Math.random() * 100) + 'vw';
+        conf.style.top = '-20px';
+        conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        conf.style.zIndex = '9999';
+        conf.style.pointerEvents = 'none';
+        document.body.appendChild(conf);
+        
+        const duration = Math.random() * 2 + 2; // 2 to 4 seconds
+        conf.animate([
+          { transform: `translate3d(0,0,0) rotate(0deg)`, opacity: 1 },
+          { transform: `translate3d(${Math.random()*200 - 100}px, 100vh, 0) rotate(${Math.random()*720}deg)`, opacity: 0 }
+        ], { duration: duration * 1000, easing: 'cubic-bezier(.37,0,.63,1)' });
+        
+        setTimeout(() => conf.remove(), duration * 1000);
+      }
+    }
+
+    // ================= TEAM SIDEBAR LOGIC =================
+    const sidebar = document.getElementById('team-sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const closeSidebarBtn = document.getElementById('close-sidebar');
+    
+    const sAvatar = document.getElementById('sidebar-avatar');
+    const sName = document.getElementById('sidebar-name');
+    const sRole = document.getElementById('sidebar-role');
+    const sStory = document.getElementById('sidebar-story');
+
+    document.querySelectorAll('.team-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Populate Sidebar Data
+        sName.innerText = card.dataset.name;
+        sRole.innerText = card.dataset.role;
+        sStory.innerHTML = card.dataset.story;
+        
+        sAvatar.innerText = card.dataset.avatar;
+        sAvatar.style.background = card.dataset.color;
+        sAvatar.style.color = card.dataset.text;
+        
+        // Open Sidebar
+        sidebar.classList.add('active');
+        sidebarOverlay.classList.add('active');
+      });
+    });
+
+    function closeSidebar() {
+      sidebar.classList.remove('active');
+      sidebarOverlay.classList.remove('active');
+    }
+
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+  </script>
+</body>
 </html>
