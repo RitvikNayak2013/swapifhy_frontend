@@ -1,0 +1,19 @@
+:root {
+    --swap-blue: #8EB9FF;
+    --swap-blue-hover: #76A4F5;
+    --swap-blue-active: #5A8ADE;
+    --swap-lavender: #D6C4FF;
+    --swap-pink: #FFB3D9;
+    --swap-gold: #FFD96A;
+
+    --text-primary: #111111;
+    --text-muted: #666666;
+    --bg-color: #F8F7FA;
+    --surface-color: #FFFFFF;
+    --border-color: #E2DFEB;
+
+    --gradient-hero: linear-gradient(135deg, #FFB3D9, #D6C4FF, #8EB9FF);
+    --gradient-btn: linear-gradient(90deg, #8EB9FF, #D6C4FF);
+    --shadow-soft: 0 20px 40px -10px rgba(142, 185, 255, 0.15);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+}
