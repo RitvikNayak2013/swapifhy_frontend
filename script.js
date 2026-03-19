@@ -234,142 +234,287 @@ function createConfetti() {
 }
 
 // ================= TEAM SIDEBAR =================
-const sidebar = document.getElementById('team-sidebar');
-const sidebarOverlay = document.getElementById('sidebar-overlay');
-const closeSidebarBtn = document.getElementById('close-sidebar');
+// const sidebar = document.getElementById('team-sidebar');
+// const sidebarOverlay = document.getElementById('sidebar-overlay');
+// const closeSidebarBtn = document.getElementById('close-sidebar');
 
-const sAvatar = document.getElementById('sidebar-avatar');
-const sName = document.getElementById('sidebar-name');
-const sRole = document.getElementById('sidebar-role');
-const sStory = document.getElementById('sidebar-story');
+// const sAvatar = document.getElementById('sidebar-avatar');
+// const sName = document.getElementById('sidebar-name');
+// const sRole = document.getElementById('sidebar-role');
+// const sStory = document.getElementById('sidebar-story');
 
-document.querySelectorAll('.team-card').forEach(card => {
-    card.addEventListener('click', () => {
-        sName.innerText = card.dataset.name;
-        sRole.innerText = card.dataset.role;
-        sStory.innerHTML = card.dataset.story;
+// document.querySelectorAll('.team-card').forEach(card => {
+//     card.addEventListener('click', () => {
+//         sName.innerText = card.dataset.name;
+//         sRole.innerText = card.dataset.role;
+//         sStory.innerHTML = card.dataset.story;
 
-        sAvatar.innerText = card.dataset.avatar;
-        sAvatar.style.background = card.dataset.color;
-        sAvatar.style.color = card.dataset.text;
+//         sAvatar.innerText = card.dataset.avatar;
+//         sAvatar.style.background = card.dataset.color;
+//         sAvatar.style.color = card.dataset.text;
 
-        gsap.to(sidebar, { x: 0, duration: 0.5, ease: "power3.out" });
-        gsap.to(sidebarOverlay, { opacity: 1, display: "block", duration: 0.3 });
-    });
-});
+//         gsap.to(sidebar, { x: 0, duration: 0.5, ease: "power3.out" });
+//         gsap.to(sidebarOverlay, { opacity: 1, display: "block", duration: 0.3 });
+//     });
+// });
 
-function closeSidebar() {
-    gsap.to(sidebar, { x: "100%", duration: 0.5 });
-    gsap.to(sidebarOverlay, { opacity: 0, duration: 0.3, onComplete: () => {
-        sidebarOverlay.style.display = "none";
-    }});
-}
+// function closeSidebar() {
+//     gsap.to(sidebar, { x: "100%", duration: 0.5 });
+//     gsap.to(sidebarOverlay, { opacity: 0, duration: 0.3, onComplete: () => {
+//         sidebarOverlay.style.display = "none";
+//     }});
+// }
 
-closeSidebarBtn?.addEventListener('click', closeSidebar);
-sidebarOverlay?.addEventListener('click', closeSidebar);
+// closeSidebarBtn?.addEventListener('click', closeSidebar);
+// sidebarOverlay?.addEventListener('click', closeSidebar);
 
-// team section
+// TEAM SECTION
 
 const teamData = [
   {
-    name: "Anwesha Ganji",
-    role: "Founder & CEO",
-    avatar: "AG",
+    name: "Pragati Singh",
+    role: "Growth Intern",
+    department: "Growth",
+    avatar: "PS",
+    image: "./images/team_members/pragati.jpeg",
+    linkedin: "",
     color: "var(--gradient-hero)",
     text: "#fff",
-    story: "Anwesha started Swapifhy because she believed that learning shouldn't be lonely or expensive. She envisioned a world where teenagers could just build together. When she isn't strategizing the next big move for Swapifhy, you can find her diving down random late-night rabbit holes."
+    description: "Writer who turns ideas into meaningful stories that connect people and products. Currently pursuing B.Tech and exploring growth through content and creativity."
   },
   {
-    name: "Aditya Sinha",
-    role: "Chief Operations Officer (COO)",
-    avatar: "AS",
-    color: "var(--swap-lavender)",
-    text: "#000",
-    story: "Aditya is the glue that holds the chaos together. He makes sure ideas don't just stay ideas, turning wild concepts into executing systems. A master at project management and keeping everyone on track."
-  },
-  {
-    name: "Falak Yadav",
-    role: "Co Founder & CTO",
-    avatar: "FY",
-    color: "linear-gradient(135deg, #FFD96A, #FFB3D9)",
+    name: "Khyati",
+    role: "Growth Intern",
+    department: "Growth",
+    avatar: "KH",
+    image: "./images/team_members/khyati.jpeg",
+    linkedin: "",
+    color: "var(--gradient-hero)",
     text: "#fff",
-    story: "Falak bridges the gap between massive creative vision and the tough technical reality. As CTO, he maps out the architecture that lets Swapifhy handle all the crazy co-creation magic seamlessly."
+    description: "Academic scholar and school captain with experience in debates, science congresses, and national events. Passionate about leadership, community building, and creative expression."
+  },
+  {
+    name: "Harima",
+    role: "Growth Intern",
+    department: "Growth",
+    avatar: "HA",
+    image: "./images/team_members/harima.jpeg",
+    linkedin: "",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Interested in startups, research, and growth strategy. Enjoys fast-paced environments and contributing to impactful ideas."
+  },
+  {
+    name: "Naira M",
+    role: "Growth Head",
+    department: "Growth",
+    avatar: "NM",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/naira-m/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Focused on building growth-driven ecosystems. Believes in turning skill trading into a lifestyle and scaling meaningful movements."
+  },
+  {
+    name: "Karan Choudhary",
+    role: "App Developer",
+    department: "Tech",
+    avatar: "KC",
+    image: "./images/team_members/karan.jpeg",
+    linkedin: "https://www.linkedin.com/in/karan-choudhary-8b62a6216/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Backend-focused developer interested in scalable systems, data pipelines, and building reliable software."
   },
   {
     name: "Aditya Raj Tiwari",
     role: "Tech Developer",
+    department: "Tech",
     avatar: "AT",
-    color: "linear-gradient(135deg, #8EB9FF, #FFD96A)",
+    image: "./images/team_members/aditya_raj.jpg",
+    linkedin: "https://www.linkedin.com/in/aditya-raj-tiwari-36a3b5293/",
+    color: "var(--gradient-hero)",
     text: "#fff",
-    story: "The code wizard. Aditya Raj turns coffee into components. Whether it's crushing bugs or building out the matchmaking algorithm that helps you find your perfect swap, he is the engine under the hood."
+    description: "Creative problem solver skilled in coding, storytelling, and media. Brings a blend of technical and communication skills."
   },
   {
-    name: "Ritvik Nayak",
-    role: "Web Developer",
-    avatar: "RN",
-    color: "linear-gradient(135deg, var(--swap-blue), var(--swap-lavender))",
+    name: "Aksh Tiwari",
+    role: "App Developer",
+    department: "Tech",
+    avatar: "AT",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/akshtiwariweb/",
+    color: "var(--gradient-hero)",
     text: "#fff",
-    story: "Ritvik is the front-end artist who ensures every pixel on Swapifhy looks buttery smooth. He's obsessed with UI/UX, micro-interactions, and making sure you enjoy simply clicking around the site."
+    description: "Frontend-focused developer and UI designer specializing in web development, cloud, networking, and creative development."
   },
   {
-    name: "Alankrita Sharma",
+    name: "Aditi S.",
     role: "Marketing Head",
-    avatar: "AS",
-    color: "linear-gradient(135deg, #D6C4FF, #8EB9FF)",
+    department: "Marketing",
+    avatar: "AD",
+    image: "./images/team_members/aditi.jpg",
+    linkedin: "https://www.linkedin.com/in/aditie21/",
+    color: "var(--gradient-hero)",
     text: "#fff",
-    story: "Alankrita makes sure the world knows about Swapifhy. She knows exactly how to tell our story, run campaigns, and build hype. If you found us on social media, you have Alankrita to thank for it."
+    description: "Creative thinker with interests in poetry, piano, and chess. Focused on thoughtful practice and continuous improvement."
   },
   {
-    name: "Anushka Bhagat",
-    role: "Creative Director",
-    avatar: "AB",
-    color: "var(--swap-pink)",
+    name: "Eva Y",
+    role: "Community & Outreach Manager",
+    department: "Marketing",
+    avatar: "EV",
+    image: "./images/team_members/eva.jpeg",
+    linkedin: "https://www.linkedin.com/in/eva-y-2177a92b3/",
+    color: "var(--gradient-hero)",
     text: "#fff",
-    story: "Anushka is the visionary behind Swapifhy's aesthetic. She curates the vibe, the brand colors, and the entire visual language that makes the platform feel like an experience rather than a boring tool."
+    description: "Passionate about STEM, research, and meaningful innovation. Enjoys deep work, creativity, and contributing to impactful solutions."
   },
   {
-    name: "Alia Gupta",
+    name: "Hansika Mulani",
     role: "Creative Strategist",
+    department: "Marketing",
+    avatar: "HM",
+    image: "./images/team_members/hansika.jpeg",
+    linkedin: "https://www.linkedin.com/in/hansika-mulani-534844389/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Energetic and creative individual who loves exploring ideas and bringing people together. Dance and expression play a big role in her life."
+  },
+  {
+    name: "Nandini Y",
+    role: "Content Writer",
+    department: "Marketing",
+    avatar: "NY",
+    image: "./images/team_members/nandini.jpeg",
+    linkedin: "https://www.linkedin.com/in/nayndini/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Content writer who enjoys crafting perspectives through words. Interested in psychology, neuroscience, and creative expression."
+  },
+  {
+    name: "Shreeti M.",
+    role: "Content Writer",
+    department: "Marketing",
+    avatar: "SM",
+    image: "./images/team_members/shreeti.jpeg",
+    linkedin: "https://www.linkedin.com/in/shreeti-mohapatra/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Uses writing to connect, inform, and inspire. Focused on meaningful conversations through words."
+  },
+  {
+    name: "Ishani Sharma",
+    role: "Chief of Staff & Partnerships",
+    department: "Management",
+    avatar: "IS",
+    image: "./images/team_members/ishani.jpeg",
+    linkedin: "https://www.linkedin.com/in/ishani-sharma-724271320/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Finance major passionate about accessibility, collaboration, and impact. Enjoys solving complex problems and building opportunities."
+  },
+  {
+    name: "Syed Azmaan",
+    role: "Partnerships & Hiring",
+    department: "Management",
+    avatar: "SA",
+    image: "./images/team_members/syed.jpeg",
+    linkedin: "https://www.linkedin.com/in/syed-azmaan-ali-madni-99642b230/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Curious thinker driven by conversations and ideas that create impact."
+  },
+  {
+    name: "Anwesha Ganji",
+    role: "Founder & CEO",
+    department: "Management",
     avatar: "AG",
-    color: "var(--swap-gold)",
-    text: "#000",
-    story: "Alia brings the big-picture creative ideas down to earth. She figures out the 'why' behind our visuals and interactions, ensuring every creative move aligns perfectly with the community's needs."
+    image: "./images/team_members/anwesha.png",
+    linkedin: "https://www.linkedin.com/in/anwesha-g-861785344/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Builder focused on entrepreneurship, research, and design. Leads Swapifhy with a vision to make collaboration and learning more accessible."
   }
 ];
 
 function renderTeam() {
   const track = document.querySelector(".team-track");
+  if (!track) return;
 
-  // duplicate for infinite loop
   const fullData = [...teamData, ...teamData];
 
-  track.innerHTML = fullData.map(member => `
-    <div class="team-card"
-      data-name="${member.name}"
-      data-role="${member.role}"
-      data-story="${member.story}"
-    >
-      <div class="team-avatar" style="background:${member.color}; color:${member.text}">
-        ${member.avatar}
+  track.innerHTML = fullData.map(member => {
+    const name = member.name || "Unknown";
+    const role = member.role || "";
+    const dept = member.department || "";
+    const avatar = member.avatar || "?";
+    const image = member.image || "";
+    const linkedin = member.linkedin || "";
+    const color = member.color || "#333";
+    const text = member.text || "#fff";
+    const description = member.description || "";
+
+    // avatar fallback
+    const avatarHTML = image && image.trim() !== ""
+      ? `<img src="${image}" alt="${name}" class="team-avatar-img">`
+      : `<div class="team-avatar" style="background:${color}; color:${text}">
+           ${avatar}
+         </div>`;
+
+    return `
+      <div class="team-card ${linkedin ? "clickable" : ""}"
+        data-linkedin="${linkedin}"
+        data-name="${name}"
+        data-role="${role}"
+        data-department="${dept}"
+        data-description="${description}"
+      >
+        ${avatarHTML}
+        <h3>${name}</h3>
+        <p>${role}</p>
       </div>
-      <h3>${member.name}</h3>
-      <p>${member.role}</p>
-    </div>
-  `).join("");
+    `;
+  }).join("");
+
+  // attach click handlers
+  document.querySelectorAll(".team-card.clickable").forEach(card => {
+    card.addEventListener("click", () => {
+      const link = card.dataset.linkedin;
+      if (link) {
+        window.open(link, "_blank");
+      }
+    });
+  });
 }
+
+let tween;
 
 function initTeamMarquee() {
   const track = document.querySelector(".team-track");
+  if (!track) return;
 
-  const totalWidth = track.scrollWidth / 2;
+  // wait for next frame so width is calculated
+  requestAnimationFrame(() => {
+    const totalWidth = track.scrollWidth / 2;
 
-  gsap.to(track, {
-    x: `-=${totalWidth}`,
-    duration: 10,
-    ease: "none",
-    repeat: -1
+    if (totalWidth === 0) {
+      console.warn("Track width is 0 → CSS/layout issue");
+      return;
+    }
+
+    gsap.killTweensOf(track);
+    gsap.set(track, { x: 0 });
+
+    tween = gsap.to(track, {
+      x: -totalWidth,
+      duration: 120,
+    //   ease: "none",
+      repeat: -1
+    });
+    console.log("tween created:", tween);
   });
-}
+} // TODO: Add Pause on Hover functionality
 
 renderTeam();
 initTeamMarquee();
