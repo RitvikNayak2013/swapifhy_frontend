@@ -18,10 +18,6 @@ body.dark-mode {
     font-family: 'Space Grotesk', sans-serif;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 @media (pointer: fine) {
     * {
     cursor: none !important;
@@ -32,7 +28,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
+    /* transition: background-color 0.5s ease, color 0.5s ease; */
     -webkit-font-smoothing: antialiased;
 }
 
@@ -153,10 +149,9 @@ header {
     align-items: center;
     padding: 24px 5%;
     position: fixed;
-    width: 100%;
+    width: 100vw;
     top: 0;
     z-index: 100;
-    transition: all 0.4s ease;
     transform: translateY(-100%);
 }
 
@@ -264,9 +259,11 @@ body.dark-mode .theme-switch .knob {
     box-shadow: 0 8px 20px rgba(142, 185, 255, 0.25);
     position: relative;
     overflow: hidden;
-    display: inline-flex;
     cursor: none;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
 }
 
 .btn-gradient::before {
@@ -1282,6 +1279,12 @@ footer {
     .founder-story-wrap {
     grid-template-columns: 1fr;
     }
+    .cursor-dot{
+        display: none;
+    }
+    .cursor-ring{
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1319,9 +1322,17 @@ footer {
     .founder-quote {
     font-size: 1.2rem;
     }
+
+    #header {
+        padding: 16px;
+        justify-content: space-between;
+    }
 }
 
-/* Container hides the overflow */
+#team{
+    overflow-x: hidden !important;
+}
+
 .team-marquee-container {
     width: 100vw;
     margin-left: calc(-50vw + 50%); /* Centers the full-width container */
