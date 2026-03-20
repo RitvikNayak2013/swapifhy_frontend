@@ -28,16 +28,16 @@
       <img src="https://www.swapifhy.com/assets/swapifhy-logo-DPxPDdg-.png" alt="Swapifhy Logo" style="height: 40px;">
     </a>
     <nav>
-      <a href="#about" class="hover-target">What is it?</a>
-      <a href="#story" class="hover-target">Story</a>
-      <a href="#features" class="hover-target">Features</a>
-      <a href="#how-it-works" class="hover-target">How it Works</a>
-      <a href="#team" class="hover-target">Team</a>
+      <a href="#about" onclick="lenis.scrollTo('#about')" class="hover-target">What is it?</a>
+      <a href="#story" onclick="lenis.scrollTo('#story')" class="hover-target">Story</a>
+      <a href="#features" onclick="lenis.scrollTo('#features')" class="hover-target">Features</a>
+      <a href="#how-it-works" onclick="lenis.scrollTo('#how-it-works')" class="hover-target">How it Works</a>
+      <a href="#team" onclick="lenis.scrollTo('#team')" class="hover-target">Team</a>
       <div class="theme-switch hover-target" id="themeToggle">
         <div class="knob"></div>
       </div>
     </nav>
-    <a href="#join" class="btn-gradient hover-target" id="cta"><span>Start Swapping</span></a>
+    <a href="#join" onclick="lenis.scrollTo('#join')" class="btn-gradient hover-target" id="cta"><span>Start Swapping</span></a>
   </header>
 
   <section id="home" class="hero">
@@ -381,7 +381,7 @@
     <p class="cta-quote">"We're not another AI learning platform. We're that group chat where someone says, 'bro what if
       we built this?' and you actually do."</p>
     <button class="btn-gradient hover-target magnetic" style="padding: 18px 48px; font-size: 1.2rem;"
-      onclick="window.scrollTo({top:0})"><span>Count me in - Join the Waitlist</span></button>
+      onclick="lenis.scrollTo('top')"><span>Count me in - Join the Waitlist</span></button>
   </section>
 
   <footer>
@@ -407,14 +407,14 @@
     </div>
   </footer>
 
-  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <!-- <div class="sidebar-overlay" id="sidebar-overlay"></div>
   <div class="team-sidebar" id="team-sidebar">
     <button class="close-sidebar hover-target" id="close-sidebar">✕</button>
     <div class="sidebar-avatar" id="sidebar-avatar"></div>
     <h3 id="sidebar-name">Name</h3>
     <p class="sidebar-role" id="sidebar-role">Role</p>
     <div class="sidebar-story" id="sidebar-story">Story goes here...</div>
-  </div>
+  </div> -->
 
   <script src="https://unpkg.com/lenis@1.3.19/dist/lenis.min.js"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
