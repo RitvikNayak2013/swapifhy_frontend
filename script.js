@@ -280,7 +280,6 @@ const teamData = [
     linkedin: "",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Writer who turns ideas into meaningful stories that connect people and products. Currently pursuing B.Tech and exploring growth through content and creativity."
   },
   {
     name: "Khyati",
@@ -291,7 +290,6 @@ const teamData = [
     linkedin: "",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Academic scholar and school captain with experience in debates, science congresses, and national events. Passionate about leadership, community building, and creative expression."
   },
   {
     name: "Harima",
@@ -302,7 +300,6 @@ const teamData = [
     linkedin: "",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Interested in startups, research, and growth strategy. Enjoys fast-paced environments and contributing to impactful ideas."
   },
   {
     name: "Naira M",
@@ -313,7 +310,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/naira-m/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Focused on building growth-driven ecosystems. Believes in turning skill trading into a lifestyle and scaling meaningful movements."
   },
   {
     name: "Karan Choudhary",
@@ -324,7 +320,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/karan-choudhary-8b62a6216/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Backend-focused developer interested in scalable systems, data pipelines, and building reliable software."
   },
   {
     name: "Aditya Raj Tiwari",
@@ -335,18 +330,16 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/aditya-raj-tiwari-36a3b5293/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Creative problem solver skilled in coding, storytelling, and media. Brings a blend of technical and communication skills."
   },
   {
     name: "Aksh Tiwari",
-    role: "App Developer",
+    role: "Web and App Developer",
     department: "Tech",
     avatar: "AT",
     image: "",
     linkedin: "https://www.linkedin.com/in/akshtiwariweb/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Frontend-focused developer and UI designer specializing in web development, cloud, networking, and creative development."
   },
   {
     name: "Aditi S.",
@@ -357,7 +350,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/aditie21/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Creative thinker with interests in poetry, piano, and chess. Focused on thoughtful practice and continuous improvement."
   },
   {
     name: "Eva Y",
@@ -368,7 +360,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/eva-y-2177a92b3/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Passionate about STEM, research, and meaningful innovation. Enjoys deep work, creativity, and contributing to impactful solutions."
   },
   {
     name: "Hansika Mulani",
@@ -379,7 +370,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/hansika-mulani-534844389/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Energetic and creative individual who loves exploring ideas and bringing people together. Dance and expression play a big role in her life."
   },
   {
     name: "Nandini Y",
@@ -390,7 +380,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/nayndini/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Content writer who enjoys crafting perspectives through words. Interested in psychology, neuroscience, and creative expression."
   },
   {
     name: "Shreeti M.",
@@ -401,7 +390,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/shreeti-mohapatra/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Uses writing to connect, inform, and inspire. Focused on meaningful conversations through words."
   },
   {
     name: "Ishani Sharma",
@@ -412,7 +400,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/ishani-sharma-724271320/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Finance major passionate about accessibility, collaboration, and impact. Enjoys solving complex problems and building opportunities."
   },
   {
     name: "Syed Azmaan",
@@ -423,7 +410,6 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/syed-azmaan-ali-madni-99642b230/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Curious thinker driven by conversations and ideas that create impact."
   },
   {
     name: "Anwesha Ganji",
@@ -434,8 +420,27 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/anwesha-g-861785344/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Builder focused on entrepreneurship, research, and design. Leads Swapifhy with a vision to make collaboration and learning more accessible."
-  }
+  },
+  {
+    name: "Falak Yadav",
+    role: "CTO",
+    department: "Management",
+    avatar: "FY",
+    image: "./images/team_members/falak.jpg",
+    linkedin: "https://www.linkedin.com/in/falak-yadav-a61199241/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+  },
+  {
+    name: "Ritvik Nayak",
+    role: "Web Developer",
+    department: "Tech",
+    avatar: "RN",
+    image: "",
+    linkedin: "https://www.linkedin.com/in/ritvik-nayak123/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+  },
 ];
 
 function renderTeam() {
