@@ -189,7 +189,7 @@ const waitlistForm = document.getElementById('waitlist-form');
 const waitlistSuccess = document.getElementById('waitlist-success');
 const emailInput = document.getElementById('email-input');
 
-const SHEETMONKEY_URL = "https://api.sheetmonkey.io/form/q8XPPrCSXq78G5MrNJFziHhis";
+const SHEETMONKEY_URL = "https://api.sheetmonkey.io/form/q8XPPrCSXq78G5MrNJFziH";
 
 waitlistForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
