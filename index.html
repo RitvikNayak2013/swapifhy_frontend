@@ -47,19 +47,27 @@
       <p>No more lonely tutorials. No more awkward 'teach me' DMs.<br>Create. Connect. Build. Repeat.</p>
 
       <div class="waitlist-container">
-        <form class="waitlist-wrapper hover-target" id="waitlist-form">
-          <input
-            type="email"
-            id="email-input"
-            name="Email"
-            placeholder="Enter your email to join the waitlist..."
-            required
-          >
-          <input type="hidden" name="Created" value="x-sheetmonkey-current-date-time">
-          <input type="hidden" name="Page" value="Swapifhy Landing Page">
-          <button type="submit" class="btn-gradient" id="join-btn"><span>Join Waitlist</span></button>
-        </form>
+        <form
+  class="waitlist-wrapper hover-target"
+  id="waitlist-form"
+  action="https://api.sheetmonkey.io/form/q8XPPrCSXq78G5MrNJFziHhis"
+  method="post"
+>
+  <input
+    type="email"
+    id="email-input"
+    name="Email"
+    placeholder="Enter your email to join the waitlist..."
+    required
+  >
 
+  <input type="hidden" name="Created" value="x-sheetmonkey-current-date-time">
+  <input type="hidden" name="Page" value="Swapifhy Landing Page">
+
+  <button type="submit" class="btn-gradient" id="join-btn">
+    <span>Join Waitlist</span>
+  </button>
+</form>
         <div class="waitlist-success" id="waitlist-success" style="display: none;">
           <div class="success-badge hover-target">
             <span class="badge-icon"></span>
