@@ -893,18 +893,18 @@ body.loaded .waitlist-wrapper {
 }
 
 /* ================= GLARE CARDS ================= */
-.cards-grid {
+/* .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
     perspective: 1000px;
-}
+} */
 
-.glare-card {
+/* .glare-card {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
-    padding: 48px 40px;
+    padding: 20px;
     border-radius: 24px;
     box-shadow: var(--shadow-soft);
     position: relative;
@@ -940,7 +940,7 @@ body.dark-mode .glare {
 
 .glare-card:hover .glare {
     opacity: 1;
-}
+} */
 
 .card-icon {
     width: 56px;
@@ -1719,4 +1719,48 @@ body.dark-mode .about-pill-pink {
   .about-math-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* features */
+#features{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  margin-top: 60px;
+}
+
+.glare-card {
+    background-color: rgba(255, 255, 255, 0.801);
+    border-radius: 10px;
+    padding: 5px 9px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.glare-card img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  object-fit: cover;
+}
+
+.glare-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 6px;
+  margin-left: 10px;
+}
+
+.glare-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-left: 10px;
 }

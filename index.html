@@ -24,20 +24,20 @@
   <div class="grid-bg"></div>
 
   <header id="header">
-    <a href="#home" class="logo hover-target">
+    <a href="#home" onclick="lenis.scrollTo('#home')" class="logo hover-target">
       <img src="https://www.swapifhy.com/assets/swapifhy-logo-DPxPDdg-.png" alt="Swapifhy Logo" style="height: 40px;">
     </a>
     <nav>
-      <a href="#about" class="hover-target">What is it?</a>
-      <a href="#story" class="hover-target">Story</a>
-      <a href="#features" class="hover-target">Features</a>
-      <a href="#how-it-works" class="hover-target">How it Works</a>
-      <a href="#team" class="hover-target">Team</a>
+      <a href="#about" onclick="lenis.scrollTo('#about')" class="hover-target">What is it?</a>
+      <a href="#story" onclick="lenis.scrollTo('#story')" class="hover-target">Story</a>
+      <a href="#features" onclick="lenis.scrollTo('#features')" class="hover-target">Features</a>
+      <a href="#how-it-works" onclick="lenis.scrollTo('#how-it-works')" class="hover-target">How it Works</a>
+      <a href="#team" onclick="lenis.scrollTo('#team')" class="hover-target">Team</a>
       <div class="theme-switch hover-target" id="themeToggle">
         <div class="knob"></div>
       </div>
     </nav>
-    <a href="#join" class="btn-gradient hover-target" id="cta"><span>Start Swapping</span></a>
+    <a href="#join" onclick="lenis.scrollTo('#join')" class="btn-gradient hover-target" id="cta"><span>Start Swapping</span></a>
   </header>
 
   <section id="home" class="hero">
@@ -272,39 +272,50 @@
   </section>
 
   <section id="features">
-    <div class="section-header reveal">
-      <h2 class="section-title">Why We're Not Like <span class="text-gradient">The Rest?</span></h2>
-    </div>
+    <h2 class="section-title">Why we're not like <span class="text-gradient">the Rest</span></h2>
     <div class="cards-grid">
-      <div class="glare-card hover-target reveal">
+      <div class="glare-card">
+        <img src="./images/features/meetpeoplenearyou.png" alt="">
+        <h3>meet people near you</h3>
+        <p>find people around you. learn together. meet in real life if you want.</p>
         <div class="glare"></div>
-        <div class="card-icon">👥</div>
-        <h3>Build Around Humans, Not Algorithms</h3>
-        <p>We're community-first. Real people. Real connections. No random matches — just genuine creative chemistry.</p>
       </div>
-      <div class="glare-card hover-target reveal">
+
+      <div class="glare-card">
+        <img src="./images/features/learnandteachatthesametime.png" alt="">
+        <h3>learn and teach at the same time</h3>
+        <p>you help someone learn something that you know. they help you learn something new.</p>
         <div class="glare"></div>
-        <div class="card-icon">✨</div>
-        <h3>It's an Experience, Not an App</h3>
-        <p>Every swap feels like an adventure. You'll laugh, fail, brainstorm, and maybe even start your next big thing.</p>
       </div>
-      <div class="glare-card hover-target reveal">
+
+      <div class="glare-card">
+        <img src="./images/features/earncredits.png" alt="">
+        <h3>earn credits when you help others</h3>
+        <p>everytime you teach, you earn credits. use those credits to learn more things</p>
         <div class="glare"></div>
-        <div class="card-icon">🚀</div>
-        <h3>Learn - Build - Launch</h3>
-        <p>You don't just learn here. You create. That's what makes it magic.</p>
       </div>
-      <div class="glare-card hover-target reveal">
+
+      <div class="glare-card">
+        <img src="./images/features/aroundtheworld.png" alt="">
+        <h3>see learning happening around the world</h3>
+        <p>watch swaps light up on a live map. people learning everywhere in realtime.</p>
         <div class="glare"></div>
-        <div class="card-icon">💫</div>
-        <h3>Zero Money Exchange</h3>
-        <p>Your skills are the currency. No payments, no fees — just pure knowledge exchange.</p>
       </div>
-    </div>
-    <div class="reveal" style="text-align: center; margin-top: 60px;">
-      <h3 style="color: var(--swap-pink); font-size: 1.5rem; margin-bottom: 16px;">✦ And Yeah... There's More Coming. ✦</h3>
-      <p style="color: var(--text-muted); font-size: 1.1rem;">Surprise projects. Collabs. Secret challenges.<br>The kind
-        of stuff you'll want to say, "I was there first."</p>
+
+      <div class="glare-card">
+        <img src="./images/features/buildtogether.png" alt="">
+        <h3>build things together</h3>
+        <p>join challenged, mini-projects, and hackathons. don't just learn - make stuff.</p>
+        <div class="glare"></div>
+      </div>
+
+      <div class="glare-card">
+        <img src="./images/features/realconvo.png" alt="">
+        <h3>real humans, real conversations</h3>
+        <p>free 1-on-1 live sessions, no videos, no bots. just people healping people</p>
+        <div class="glare"></div>
+      </div>
+
     </div>
   </section>
 
@@ -336,7 +347,7 @@
       </div>
     </div>
     <div class="timeline-footer-quote reveal">
-      <p>Somewhere in that chaos — ideas are born, friendships happen, and projects come to life.<br><br><span
+      <p>Somewhere in that chaos - ideas are born, friendships happen, and projects come to life.<br><br><span
           style="color: var(--swap-pink); font-size: 1.5rem;">"Not just skill-swapping. Soul-swapping."</span></p>
     </div>
   </section>
