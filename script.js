@@ -271,6 +271,17 @@ function createConfetti() {
 // TEAM SECTION
 const teamData = [
   {
+    name: "Falak Yadav",
+    role: "CTO & Co-Founder",
+    department: "Tech",
+    avatar: "FY",
+    image: "./images/team_members/falak.jpeg",
+    linkedin: "https://www.linkedin.com/in/falak-yadav/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Chief Technology Officer and Co-Founder of Swapifhy. Visionary tech builder focused on creating scalable platforms that enable meaningful human connection and skill exchange."
+  },
+  {
     name: "Pragati Singh",
     role: "Growth Intern",
     department: "Growth",
@@ -324,6 +335,17 @@ const teamData = [
     color: "var(--gradient-hero)",
     text: "#fff",
     description: "Backend-focused developer interested in scalable systems, data pipelines, and building reliable software."
+  },
+  {
+    name: "Ritvik Nayak",
+    role: "Developer",
+    department: "Tech",
+    avatar: "RN",
+    image: "./images/team_members/ritvik.jpeg",
+    linkedin: "https://www.linkedin.com/in/ritvik-nayak/",
+    color: "var(--gradient-hero)",
+    text: "#fff",
+    description: "Full-stack developer passionate about building elegant solutions and bringing creative ideas to life through code."
   },
   {
     name: "Aditya Raj Tiwari",
