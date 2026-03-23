@@ -188,45 +188,30 @@ const joinBtn = document.getElementById('join-btn');
 const waitlistForm = document.getElementById('waitlist-form');
 const waitlistSuccess = document.getElementById('waitlist-success');
 const emailInput = document.getElementById('email-input');
-const nameInput = document.getElementById('name-input');
 
 const SHEETMONKEY_URL = "https://api.sheetmonkey.io/form/vsnqvEtTYpTSmvULkojiXn";
 
 waitlistForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const name = nameInput?.value.trim();
   const email = emailInput?.value.trim();
-  
-  if (!email || !name) {
-    alert("Please fill in both name and email!");
-    return;
-  }
+  if (!email) return;
 
   joinBtn.disabled = true;
   joinBtn.innerHTML = "<span>Joining...</span>";
 
-  try {
-    // Create URLSearchParams instead of FormData for better CORS compatibility
-    const params = new URLSearchParams();
-    params.append('Name', name);
-    params.append('Email', email);
-    params.append('Created', new Date().toISOString());
-    params.append('Page', 'Swapifhy Landing Page');
+  const formData = new FormData(waitlistForm);
 
+  try {
     const response = await fetch(SHEETMONKEY_URL, {
       method: "POST",
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: params.toString()
+      body: formData
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error("Failed to submit form");
     }
 
-    // Success! Show the success state
     gsap.to(waitlistForm, {
       opacity: 0,
       duration: 0.3,
@@ -245,7 +230,8 @@ waitlistForm?.addEventListener('submit', async (e) => {
     });
   } catch (error) {
     console.error("SheetMonkey error:", error);
-    alert("Something went wrong. Please try again or contact us at support@swapifhy.com");
+    alert("Something went wrong while joining the waitlist. Please try again.");
+  } finally {
     joinBtn.disabled = false;
     joinBtn.innerHTML = "<span>Join Waitlist</span>";
   }
