@@ -195,12 +195,7 @@ waitlistForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const email = emailInput?.value.trim();
-  const name = document.getElementById('name-input')?.value.trim();
-  
-  if (!email || !name) {
-    alert("Please fill in all fields");
-    return;
-  }
+  if (!email) return;
 
   joinBtn.disabled = true;
   joinBtn.innerHTML = "<span>Joining...</span>";
@@ -210,12 +205,12 @@ waitlistForm?.addEventListener('submit', async (e) => {
   try {
     const response = await fetch(SHEETMONKEY_URL, {
       method: "POST",
-      body: formData,
-      mode: 'no-cors' // SheetMonkey handles CORS
+      body: formData
     });
 
-    // With no-cors mode, we can't check response status, so we'll assume success
-    // SheetMonkey will process the request even if we can't read the response
+    if (!response.ok) {
+      throw new Error("Failed to submit form");
+    }
 
     gsap.to(waitlistForm, {
       opacity: 0,
@@ -235,20 +230,7 @@ waitlistForm?.addEventListener('submit', async (e) => {
     });
   } catch (error) {
     console.error("SheetMonkey error:", error);
-    // Still show success message - SheetMonkey likely processed it
-    gsap.to(waitlistForm, {
-      opacity: 0,
-      duration: 0.3,
-      onComplete: () => {
-        waitlistForm.style.display = "none";
-        gsap.fromTo(
-          waitlistSuccess,
-          { opacity: 0, scale: 0.9 },
-          { opacity: 1, scale: 1, display: "flex", duration: 0.5 }
-        );
-        createConfetti();
-      }
-    });
+    alert("Something went wrong while joining the waitlist. Please try again.");
   } finally {
     joinBtn.disabled = false;
     joinBtn.innerHTML = "<span>Join Waitlist</span>";
