@@ -1,101 +1,50 @@
-// Setup GSAP and ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-// DarkMode Toggle
+// Theme toggle
 const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
 themeToggle?.addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
+  body.classList.toggle('dark-theme');
 });
 
-// Cursor Follower
-const cursorDot = document.querySelector('.cursor-dot');
-const cursorRing = document.querySelector('.cursor-ring');
-const mouseGlow = document.querySelector('.mouse-glow');
-
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-
-if (cursorRing && mouseGlow && cursorDot) {
-  const moveRingX = gsap.quickTo(cursorRing, "x", { duration: 0.3, ease: "power3.out" });
-  const moveRingY = gsap.quickTo(cursorRing, "y", { duration: 0.3, ease: "power3.out" });
-
-  const moveGlowX = gsap.quickTo(mouseGlow, "x", { duration: 0.8, ease: "power2.out" });
-  const moveGlowY = gsap.quickTo(mouseGlow, "y", { duration: 0.8, ease: "power2.out" });
-
-  window.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    gsap.set(cursorDot, {
-      x: mouseX,
-      y: mouseY
-    });
-
-    moveRingX(mouseX);
-    moveRingY(mouseY);
-
-    moveGlowX(mouseX);
-    moveGlowY(mouseY);
-  });
-}
-
-// Hover Targets
-function attachHoverEvents() {
-  document.querySelectorAll('.hover-target').forEach(target => {
-    target.addEventListener('mouseenter', () => {
-      document.body.classList.add("hovering");
-    });
-
-    target.addEventListener('mouseleave', () => {
-      document.body.classList.remove("hovering");
-    });
-  });
-}
-attachHoverEvents();
-
-// Magnetic Buttons
-document.querySelectorAll('.magnetic').forEach(btn => {
-  const xTo = gsap.quickTo(btn, "x", { duration: 0.3, ease: "power3.out" });
-  const yTo = gsap.quickTo(btn, "y", { duration: 0.3, ease: "power3.out" });
-
-  btn.addEventListener('mousemove', (e) => {
-    const rect = btn.getBoundingClientRect();
+// Magnetic effect
+document.querySelectorAll('.magnetic').forEach(el => {
+  el.addEventListener('mousemove', (e) => {
+    const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    xTo(x * 0.25);
-    yTo(y * 0.25);
-
-    gsap.to(btn, { scale: 1.05, duration: 0.2 });
+    gsap.to(el, {
+      x: x * 0.2,
+      y: y * 0.2,
+      duration: 0.3,
+      ease: "power2.out"
+    });
   });
 
-  btn.addEventListener('mouseleave', () => {
-    xTo(0);
-    yTo(0);
-    gsap.to(btn, { scale: 1, duration: 0.3 });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(el, {
+      x: 0,
+      y: 0,
+      duration: 0.5,
+      ease: "elastic.out(1, 0.4)"
+    });
   });
 });
 
-// 3D Card Effect
-document.querySelectorAll('.glare-card').forEach(card => {
-  const glare = card.querySelector('.glare');
+// Tilt effect
+document.querySelectorAll('.tilt-card').forEach(card => {
+  const glare = card.querySelector('.feature-glare, .story-card-glare');
+  const glareColor = card.dataset.glare || "rgba(255,255,255,0.25)";
 
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
-
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
-
-    const isDark = document.body.classList.contains('dark-mode');
-    const glareColor = isDark
-      ? 'rgba(255,255,255,0.1)'
-      : 'rgba(255,255,255,0.6)';
+    const rotateY = ((x / rect.width) - 0.5) * 12;
+    const rotateX = ((y / rect.height) - 0.5) * -12;
 
     gsap.to(card, {
       rotateX,
@@ -189,7 +138,7 @@ const waitlistForm = document.getElementById('waitlist-form');
 const waitlistSuccess = document.getElementById('waitlist-success');
 const emailInput = document.getElementById('email-input');
 
-const SHEETMONKEY_URL = "https://api.sheetmonkey.io/form/vsnqvEtTYpTSmvULkojiXn";
+const SHEETMONKEY_URL = "https://api.sheetmonkey.io/forms/vsnqvEtTYpTSmvULkojiXn";
 
 waitlistForm?.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -205,11 +154,17 @@ waitlistForm?.addEventListener('submit', async (e) => {
   try {
     const response = await fetch(SHEETMONKEY_URL, {
       method: "POST",
-      body: formData
+      body: formData,
+      redirect: "follow"
     });
 
+    const responseText = await response.text();
+
+    console.log("SheetMonkey status:", response.status);
+    console.log("SheetMonkey response:", responseText);
+
     if (!response.ok) {
-      throw new Error("Failed to submit form");
+      throw new Error(`Failed to submit form: ${response.status} ${responseText}`);
     }
 
     gsap.to(waitlistForm, {
@@ -230,7 +185,7 @@ waitlistForm?.addEventListener('submit', async (e) => {
     });
   } catch (error) {
     console.error("SheetMonkey error:", error);
-    alert("Something went wrong while joining the waitlist. Please try again.");
+    alert("Something went wrong while joining the waitlist. Please check the console or Network tab for the exact SheetMonkey error.");
   } finally {
     joinBtn.disabled = false;
     joinBtn.innerHTML = "<span>Join Waitlist</span>";
@@ -279,7 +234,7 @@ const teamData = [
     linkedin: "https://www.linkedin.com/in/falak-yadav/",
     color: "var(--gradient-hero)",
     text: "#fff",
-    description: "Chief Technology Officer and Co-Founder of Swapifhy. Visionary tech builder focused on creating scalable platforms that enable meaningful human connection and skill exchange."
+    description: "Chief Technology Officer and Co-Founder of Swapifhy. Focused on product, systems, and building student-first tech."
   },
   {
     name: "Pragati Singh",
@@ -368,61 +323,6 @@ const teamData = [
     color: "var(--gradient-hero)",
     text: "#fff",
     description: "Frontend-focused developer and UI designer specializing in web development, cloud, networking, and creative development."
-  },
-  {
-    name: "Aditi S.",
-    role: "Marketing Head",
-    department: "Marketing",
-    avatar: "AD",
-    image: "./images/team_members/aditi.jpg",
-    linkedin: "https://www.linkedin.com/in/aditie21/",
-    color: "var(--gradient-hero)",
-    text: "#fff",
-    description: "Creative thinker with interests in poetry, piano, and chess. Focused on thoughtful practice and continuous improvement."
-  },
-  {
-    name: "Eva Y",
-    role: "Community & Outreach Manager",
-    department: "Marketing",
-    avatar: "EV",
-    image: "./images/team_members/eva.jpeg",
-    linkedin: "https://www.linkedin.com/in/eva-y-2177a92b3/",
-    color: "var(--gradient-hero)",
-    text: "#fff",
-    description: "Passionate about STEM, research, and meaningful innovation. Enjoys deep work, creativity, and contributing to impactful solutions."
-  },
-  {
-    name: "Hansika Mulani",
-    role: "Creative Strategist",
-    department: "Marketing",
-    avatar: "HM",
-    image: "./images/team_members/hansika.jpeg",
-    linkedin: "https://www.linkedin.com/in/hansika-mulani-534844389/",
-    color: "var(--gradient-hero)",
-    text: "#fff",
-    description: "Energetic and creative individual who loves exploring ideas and bringing people together. Dance and expression play a big role in her life."
-  },
-  {
-    name: "Nandini Y",
-    role: "Content Writer",
-    department: "Marketing",
-    avatar: "NY",
-    image: "./images/team_members/nandini.jpeg",
-    linkedin: "https://www.linkedin.com/in/nayndini/",
-    color: "var(--gradient-hero)",
-    text: "#fff",
-    description: "Content writer who enjoys crafting perspectives through words. Interested in psychology, neuroscience, and creative expression."
-  },
-  {
-    name: "Shreeti M.",
-    role: "Content Writer",
-    department: "Marketing",
-    avatar: "SM",
-    image: "./images/team_members/shreeti.jpeg",
-    linkedin: "https://www.linkedin.com/in/shreeti-mohapatra/",
-    color: "var(--gradient-hero)",
-    text: "#fff",
-    description: "Uses writing to connect, inform, and inspire. Focused on meaningful conversations through words."
   },
   {
     name: "Ishani Sharma",
