@@ -4,7 +4,7 @@ gsap.registerPlugin(ScrollTrigger);
 // DarkMode Toggle
 const themeToggle = document.getElementById('themeToggle');
 themeToggle?.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
+  document.body.classList.toggle('dark-mode');
 });
 
 // Cursor Follower
@@ -16,171 +16,171 @@ let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 
 if (cursorRing && mouseGlow && cursorDot) {
-    const moveRingX = gsap.quickTo(cursorRing, "x", { duration: 0.3, ease: "power3.out" });
-    const moveRingY = gsap.quickTo(cursorRing, "y", { duration: 0.3, ease: "power3.out" });
+  const moveRingX = gsap.quickTo(cursorRing, "x", { duration: 0.3, ease: "power3.out" });
+  const moveRingY = gsap.quickTo(cursorRing, "y", { duration: 0.3, ease: "power3.out" });
 
-    const moveGlowX = gsap.quickTo(mouseGlow, "x", { duration: 0.8, ease: "power2.out" });
-    const moveGlowY = gsap.quickTo(mouseGlow, "y", { duration: 0.8, ease: "power2.out" });
+  const moveGlowX = gsap.quickTo(mouseGlow, "x", { duration: 0.8, ease: "power2.out" });
+  const moveGlowY = gsap.quickTo(mouseGlow, "y", { duration: 0.8, ease: "power2.out" });
 
-    window.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-        gsap.set(cursorDot, {
-            x: mouseX,
-            y: mouseY
-        });
-
-        moveRingX(mouseX);
-        moveRingY(mouseY);
-
-        moveGlowX(mouseX);
-        moveGlowY(mouseY);
+    gsap.set(cursorDot, {
+      x: mouseX,
+      y: mouseY
     });
+
+    moveRingX(mouseX);
+    moveRingY(mouseY);
+
+    moveGlowX(mouseX);
+    moveGlowY(mouseY);
+  });
 }
 
 // Hover Targets
 function attachHoverEvents() {
-    document.querySelectorAll('.hover-target').forEach(target => {
-        target.addEventListener('mouseenter', () => {
-            document.body.classList.add("hovering");
-        });
-
-        target.addEventListener('mouseleave', () => {
-            document.body.classList.remove("hovering");
-        });
+  document.querySelectorAll('.hover-target').forEach(target => {
+    target.addEventListener('mouseenter', () => {
+      document.body.classList.add("hovering");
     });
+
+    target.addEventListener('mouseleave', () => {
+      document.body.classList.remove("hovering");
+    });
+  });
 }
 attachHoverEvents();
 
 // Magnetic Buttons
 document.querySelectorAll('.magnetic').forEach(btn => {
-    const xTo = gsap.quickTo(btn, "x", { duration: 0.3, ease: "power3.out" });
-    const yTo = gsap.quickTo(btn, "y", { duration: 0.3, ease: "power3.out" });
+  const xTo = gsap.quickTo(btn, "x", { duration: 0.3, ease: "power3.out" });
+  const yTo = gsap.quickTo(btn, "y", { duration: 0.3, ease: "power3.out" });
 
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
-        xTo(x * 0.25);
-        yTo(y * 0.25);
+    xTo(x * 0.25);
+    yTo(y * 0.25);
 
-        gsap.to(btn, { scale: 1.05, duration: 0.2 });
-    });
+    gsap.to(btn, { scale: 1.05, duration: 0.2 });
+  });
 
-    btn.addEventListener('mouseleave', () => {
-        xTo(0);
-        yTo(0);
-        gsap.to(btn, { scale: 1, duration: 0.3 });
-    });
+  btn.addEventListener('mouseleave', () => {
+    xTo(0);
+    yTo(0);
+    gsap.to(btn, { scale: 1, duration: 0.3 });
+  });
 });
 
 // 3D Card Effect
 document.querySelectorAll('.glare-card').forEach(card => {
-    const glare = card.querySelector('.glare');
+  const glare = card.querySelector('.glare');
 
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
 
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
 
-        const isDark = document.body.classList.contains('dark-mode');
-        const glareColor = isDark
-            ? 'rgba(255,255,255,0.1)'
-            : 'rgba(255,255,255,0.6)';
+    const isDark = document.body.classList.contains('dark-mode');
+    const glareColor = isDark
+      ? 'rgba(255,255,255,0.1)'
+      : 'rgba(255,255,255,0.6)';
 
-        gsap.to(card, {
-            rotateX,
-            rotateY,
-            y: -8,
-            scale: 1.02,
-            duration: 0.3,
-            ease: "power2.out",
-            transformPerspective: 1000
-        });
-
-        if (glare) {
-            gsap.set(glare, {
-                background: `radial-gradient(circle at ${x}px ${y}px, ${glareColor}, transparent 60%)`,
-                opacity: 1
-            });
-        }
+    gsap.to(card, {
+      rotateX,
+      rotateY,
+      y: -8,
+      scale: 1.02,
+      duration: 0.3,
+      ease: "power2.out",
+      transformPerspective: 1000
     });
 
-    card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-            rotateX: 0,
-            rotateY: 0,
-            y: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: "power3.out"
-        });
+    if (glare) {
+      gsap.set(glare, {
+        background: `radial-gradient(circle at ${x}px ${y}px, ${glareColor}, transparent 60%)`,
+        opacity: 1
+      });
+    }
+  });
 
-        if (glare) {
-            gsap.to(glare, { opacity: 0, duration: 0.3 });
-        }
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      y: 0,
+      scale: 1,
+      duration: 0.5,
+      ease: "power3.out"
     });
+
+    if (glare) {
+      gsap.to(glare, { opacity: 0, duration: 0.3 });
+    }
+  });
 });
 
 // Navbar scroll effect
 const header = document.getElementById('header');
 
 ScrollTrigger.create({
-    start: "top -30",
-    onUpdate: (self) => {
-        if (self.scroll() > 30) {
-            header?.classList.add("scrolled");
-        } else {
-            header?.classList.remove("scrolled");
-        }
+  start: "top -30",
+  onUpdate: (self) => {
+    if (self.scroll() > 30) {
+      header?.classList.add("scrolled");
+    } else {
+      header?.classList.remove("scrolled");
     }
+  }
 });
 
 // Reveal Animations
 gsap.utils.toArray('.reveal').forEach(el => {
-    gsap.from(el, {
-        y: -30,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: el,
-            start: "top 85%"
-        }
-    });
+  gsap.from(el, {
+    y: -30,
+    opacity: 0,
+    duration: 1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%"
+    }
+  });
 });
 
 gsap.utils.toArray('.reveal-left').forEach(el => {
-    gsap.from(el, {
-        x: -60,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-            trigger: el,
-            start: "top 85%"
-        }
-    });
+  gsap.from(el, {
+    x: -60,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%"
+    }
+  });
 });
 
 gsap.utils.toArray('.reveal-right').forEach(el => {
-    gsap.from(el, {
-        x: 60,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-            trigger: el,
-            start: "top 85%"
-        }
-    });
+  gsap.from(el, {
+    x: 60,
+    opacity: 0,
+    duration: 1,
+    scrollTrigger: {
+      trigger: el,
+      start: "top 85%"
+    }
+  });
 });
 
 // ================= WAITLIST WITH SHEETMONKEY =================
@@ -188,84 +188,98 @@ const joinBtn = document.getElementById('join-btn');
 const waitlistForm = document.getElementById('waitlist-form');
 const waitlistSuccess = document.getElementById('waitlist-success');
 const emailInput = document.getElementById('email-input');
+const nameInput = document.getElementById('name-input');
 
 const SHEETMONKEY_URL = "https://api.sheetmonkey.io/form/vsnqvEtTYpTSmvULkojiXn";
 
 waitlistForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const email = emailInput?.value.trim();
-    if (!email) return;
+  const name = nameInput?.value.trim();
+  const email = emailInput?.value.trim();
+  
+  if (!email || !name) {
+    alert("Please fill in both name and email!");
+    return;
+  }
 
-    joinBtn.disabled = true;
-    joinBtn.innerHTML = "<span>Joining...</span>";
+  joinBtn.disabled = true;
+  joinBtn.innerHTML = "<span>Joining...</span>";
 
-    const formData = new FormData(waitlistForm);
+  try {
+    // Create URLSearchParams instead of FormData for better CORS compatibility
+    const params = new URLSearchParams();
+    params.append('Name', name);
+    params.append('Email', email);
+    params.append('Created', new Date().toISOString());
+    params.append('Page', 'Swapifhy Landing Page');
 
-    try {
-        const response = await fetch(SHEETMONKEY_URL, {
-            method: "POST",
-            body: formData
-        });
+    const response = await fetch(SHEETMONKEY_URL, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: params.toString()
+    });
 
-        if (!response.ok) {
-            throw new Error("Failed to submit form");
-        }
-
-        gsap.to(waitlistForm, {
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => {
-                waitlistForm.style.display = "none";
-
-                gsap.fromTo(
-                    waitlistSuccess,
-                    { opacity: 0, scale: 0.9 },
-                    { opacity: 1, scale: 1, display: "flex", duration: 0.5 }
-                );
-
-                createConfetti();
-                waitlistForm.reset();
-            }
-        });
-    } catch (error) {
-        console.error("SheetMonkey error:", error);
-        alert("Something went wrong while joining the waitlist. Please try again.");
-    } finally {
-        joinBtn.disabled = false;
-        joinBtn.innerHTML = "<span>Join Waitlist</span>";
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    // Success! Show the success state
+    gsap.to(waitlistForm, {
+      opacity: 0,
+      duration: 0.3,
+      onComplete: () => {
+        waitlistForm.style.display = "none";
+
+        gsap.fromTo(
+          waitlistSuccess,
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, display: "flex", duration: 0.5 }
+        );
+
+        createConfetti();
+        waitlistForm.reset();
+      }
+    });
+  } catch (error) {
+    console.error("SheetMonkey error:", error);
+    alert("Something went wrong. Please try again or contact us at support@swapifhy.com");
+    joinBtn.disabled = false;
+    joinBtn.innerHTML = "<span>Join Waitlist</span>";
+  }
 });
 
 function createConfetti() {
-    const colors = ['#8EB9FF', '#FFB3D9', '#FFD96A', '#D6C4FF'];
+  const colors = ['#8EB9FF', '#FFB3D9', '#FFD96A', '#D6C4FF'];
 
-    for (let i = 0; i < 40; i++) {
-        const conf = document.createElement('div');
+  for (let i = 0; i < 40; i++) {
+    const conf = document.createElement('div');
 
-        Object.assign(conf.style, {
-            position: 'fixed',
-            width: Math.random() > 0.5 ? '8px' : '12px',
-            height: '8px',
-            backgroundColor: colors[Math.floor(Math.random() * colors.length)],
-            left: Math.random() * 100 + 'vw',
-            top: '-20px',
-            zIndex: 9999,
-            pointerEvents: 'none'
-        });
+    Object.assign(conf.style, {
+      position: 'fixed',
+      width: Math.random() > 0.5 ? '8px' : '12px',
+      height: '8px',
+      backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+      left: Math.random() * 100 + 'vw',
+      top: '-20px',
+      zIndex: 9999,
+      pointerEvents: 'none'
+    });
 
-        document.body.appendChild(conf);
+    document.body.appendChild(conf);
 
-        gsap.to(conf, {
-            y: window.innerHeight + 100,
-            x: "+=" + (Math.random() * 200 - 100),
-            rotation: Math.random() * 720,
-            opacity: 0,
-            duration: Math.random() * 2 + 2,
-            ease: "power2.out",
-            onComplete: () => conf.remove()
-        });
-    }
+    gsap.to(conf, {
+      y: window.innerHeight + 100,
+      x: "+=" + (Math.random() * 200 - 100),
+      rotation: Math.random() * 720,
+      opacity: 0,
+      duration: Math.random() * 2 + 2,
+      ease: "power2.out",
+      onComplete: () => conf.remove()
+    });
+  }
 }
 
 // TEAM SECTION
