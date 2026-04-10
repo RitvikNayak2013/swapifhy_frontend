@@ -535,3 +535,11 @@ function initTeamMarquee() {
 
 renderTeam();
 initTeamMarquee();
+
+// Founder story toggle
+function toggleFounderStory() {
+  const body = document.getElementById('founderStoryBody');
+  const btn = document.getElementById('founderReadMore');
+  const expanded = body.classList.toggle('expanded');
+  btn.textContent = expanded ? 'Read less ↑' : 'Read more ↓';
+}

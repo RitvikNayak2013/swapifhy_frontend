@@ -10,6 +10,24 @@
     rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./globals.css">
+
+
+  <style>
+    .founder-note a {
+      color: black;
+      text-decoration: none;
+      border-radius: 100px;
+      border: 2px solid #00000090;
+      padding: 8px 15px;
+      font-weight: 600;
+    }
+    .founder-note a:hover {
+      background-color: #111;
+      /* border: none; */
+      color: white;
+    }
+  </style>
+
 </head>
 
 <body class="loaded">
@@ -247,15 +265,14 @@
     <div class="founder-story-wrap">
       <div class="founder-story-card reveal-left">
         <div class="founder-kicker">Founder Story</div>
-        <p>Anwesha founded Swapifhy after noticing how many talented students had skills they were proud of, but no real
-          space to exchange them in a way that felt natural, creative, and genuinely exciting.</p>
-        <p>What started as a simple idea slowly turned into a bigger question: what if learning did not have to feel
-          transactional? What if instead of paying for every lesson, people could teach what they knew and learn what
-          they loved in return?</p>
-        <p>That thought became the early version of Swapifhy. A place where a guitarist could connect with an editor, a
-          designer could team up with a writer, and students could build cool things together just by trading what they
-          were already good at.</p>
-        <p>Swapifhy was built to make learning feel more human, more collaborative, and a lot more alive.</p>
+        <div class="founder-story-body" id="founderStoryBody">
+          <p>We bring back human connection, because social media and AI promised us connection but actually just made us more alone. We're more "connected" than ever and somehow more isolated, and I refuse to accept that as normal.</p>
+          <p>But I didn't build Swapifhy because it sounded like a cool startup idea. I built it because I've lived the problem. I once enrolled in a 50,000-rupee robotics course. At the end, I wasn't satisfied — instructors kept changing, I felt my investment was wasted. I started a Coursera course in May and still haven't completed more than 10% of it because it put me to sleep every time I put the lectures on. </p>
+          <p>But then I'd turn around and teach my friends design. Learn coding from classmates. Watch skills get exchanged everywhere around me... except on a platform actually built for it. I've watched talented people not learn things because they couldn't afford courses. And I've watched other talented people unable to monetize skills they already had. Both problems existed in the same space. I was done waiting for someone else to fix it. So I built it myself.</p>
+          <p>It's the world I wish I had when I started learning design, research, coding, everything. It's about making learning feel less lonely, bringing people together around actually helping each other grow. </p>
+          <p>This is me — Anwesha — building the world I needed. Whether it becomes the next big thing or not, I'm building it anyway.The waitlist is ready. The community is forming. The product works.The only thing missing is you.</p>
+        </div>
+        <button class="founder-read-more" id="founderReadMore" onclick="toggleFounderStory()">Read more ↓</button>
       </div>
 
       <div class="founder-quote-card reveal-right">
@@ -268,11 +285,13 @@
         </div>
 
         <div class="founder-quote">
-          “I did not want to build just another platform. I wanted to build a place where skills could spark
-          friendships, ideas, and real creation.”
+          "I did not want to build just another platform, I wanted to build a place where learning is fun, and people actually connect with each other"
         </div>
 
-        <div class="founder-note"></div>
+        <div class="founder-note">
+          <a href="https://www.canva.com/design/DAHD671_pT0/gNQQYn_cMZanCplieQK08w/view?utm_content=DAHD671_pT0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h519ba88de0" target="_blank" rel="noopener noreferrer">View our PitchDeck</a>
+          <a href="https://docs.google.com/document/d/1f3uONTP5idsmCVlE4mfELnTKmpGGbWZ3ECOSgrTGcAs/edit?tab=t.0" target="_blank" rel="noopener noreferrer">View our ConceptNote</a>
+        </div>
       </div>
     </div>
   </section>
