@@ -9,6 +9,7 @@ body.dark-mode {
     --swap-pink: #FFC1E4;
     --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
     --glass-bg: rgba(25, 21, 32, 0.6);
+    --black-white: #fff;
 }
 
 * {
@@ -895,6 +896,21 @@ body.loaded .waitlist-wrapper {
     gap: 8px;
     justify-content: center;
     flex-direction: column;
+}
+
+.founder-note a {
+    color: black;
+    text-decoration: none;
+    border-radius: 100px;
+    border: 2px solid var(--text-primary);
+    padding: 8px 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.founder-note a:hover {
+    background-color: var(--black-white);
+    border: 2px solid var(--black-white);
+    color: var(--surface-color);
 }
 
 .founder-img-popup {

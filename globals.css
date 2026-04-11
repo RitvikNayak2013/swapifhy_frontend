@@ -16,6 +16,7 @@
     --gradient-btn: linear-gradient(90deg, #8EB9FF, #D6C4FF);
     --shadow-soft: 0 20px 40px -10px rgba(142, 185, 255, 0.15);
     --glass-bg: rgba(255, 255, 255, 0.6);
+    --black-white: #000;
 }
 
 .team-track {
