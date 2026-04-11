@@ -183,60 +183,6 @@ gsap.utils.toArray('.reveal-right').forEach(el => {
     });
 });
 
-// ================= WAITLIST WITH SHEETMONKEY =================
-const joinBtn = document.getElementById('join-btn');
-const waitlistForm = document.getElementById('waitlist-form');
-const waitlistSuccess = document.getElementById('waitlist-success');
-const emailInput = document.getElementById('email-input');
-
-const SHEETMONKEY_URL = "https://api.sheetmonkey.io/form/vsnqvEtTYpTSmvULkojiXn";
-
-waitlistForm?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = emailInput?.value.trim();
-    if (!email) return;
-
-    joinBtn.disabled = true;
-    joinBtn.innerHTML = "<span>Joining...</span>";
-
-    const formData = new FormData(waitlistForm);
-
-    try {
-        const response = await fetch(SHEETMONKEY_URL, {
-            method: "POST",
-            body: formData
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to submit form");
-        }
-
-        gsap.to(waitlistForm, {
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => {
-                waitlistForm.style.display = "none";
-
-                gsap.fromTo(
-                    waitlistSuccess,
-                    { opacity: 0, scale: 0.9 },
-                    { opacity: 1, scale: 1, display: "flex", duration: 0.5 }
-                );
-
-                createConfetti();
-                waitlistForm.reset();
-            }
-        });
-    } catch (error) {
-        console.error("SheetMonkey error:", error);
-        alert("Something went wrong while joining the waitlist. Please try again.");
-    } finally {
-        joinBtn.disabled = false;
-        joinBtn.innerHTML = "<span>Join Waitlist</span>";
-    }
-});
-
 function createConfetti() {
     const colors = ['#8EB9FF', '#FFB3D9', '#FFD96A', '#D6C4FF'];
 
