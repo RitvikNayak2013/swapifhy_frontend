@@ -536,10 +536,40 @@ function initTeamMarquee() {
 renderTeam();
 initTeamMarquee();
 
-// Founder story toggle
+// Founder story toggle 
 function toggleFounderStory() {
   const body = document.getElementById('founderStoryBody');
   const btn = document.getElementById('founderReadMore');
   const expanded = body.classList.toggle('expanded');
+
+  const founderImg = document.querySelector('.founder-img-popup');
+  const pitchPreview = document.querySelector('.pitch-deck-preview');
+
+  if (expanded) {
+    // Animate founder image in
+    gsap.set(founderImg, { display: 'flex' });
+    gsap.fromTo(founderImg,
+      { opacity: 0, y: 40, scale: 0.88 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.5)' }
+    );
+
+    // Animate pitch deck preview in with a slight delay
+    gsap.set(pitchPreview, { display: 'block' });
+    gsap.fromTo(pitchPreview,
+      { opacity: 0, y: 30, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 0.2, ease: 'power3.out' }
+    );
+  } else {
+    // Animate out
+    gsap.to(founderImg, {
+      opacity: 0, y: 30, scale: 0.92, duration: 0.4, ease: 'power2.in',
+      onComplete: () => gsap.set(founderImg, { display: 'none' })
+    });
+    gsap.to(pitchPreview, {
+      opacity: 0, y: 20, scale: 0.96, duration: 0.35, ease: 'power2.in',
+      onComplete: () => gsap.set(pitchPreview, { display: 'none' })
+    });
+  }
+
   btn.textContent = expanded ? 'Read less ↑' : 'Read more ↓';
 }

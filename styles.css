@@ -897,6 +897,132 @@ body.loaded .waitlist-wrapper {
     flex-direction: column;
 }
 
+.founder-img-popup {
+  display: none;
+  position: relative;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  z-index: 1;
+}
+
+.founder-img-popup img {
+  width: 58%;
+  max-width: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(255, 179, 217, 0.35));
+  position: relative;
+  z-index: 2;
+  animation: founderFloat 4s ease-in-out infinite;
+}
+
+.founder-img-glow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 36px;
+  background: radial-gradient(ellipse, rgba(214, 196, 255, 0.45) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes founderFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.12); }
+}
+
+/* ---- Pitch Deck Preview ---- */
+.pitch-deck-preview {
+  display: none;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(142, 185, 255, 0.12);
+}
+
+.pitch-deck-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(142, 185, 255, 0.06);
+}
+
+.pitch-deck-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(142, 185, 255, 0.15);
+  color: var(--swap-blue-active);
+  border: 1px solid rgba(142, 185, 255, 0.3);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+body.dark-mode .pitch-deck-badge {
+  color: var(--swap-blue);
+}
+
+.pitch-deck-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.pitch-deck-frame-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+}
+
+.pitch-deck-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pitch-deck-frame-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 70%, var(--surface-color) 100%);
+}
+
+.pitch-deck-open-btn {
+  display: block;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--swap-blue-active);
+  text-decoration: none;
+  border-top: 1px solid var(--border-color);
+  transition: background 0.2s, color 0.2s;
+}
+
+body.dark-mode .pitch-deck-open-btn {
+  color: var(--swap-blue);
+}
+
+.pitch-deck-open-btn:hover {
+  background: rgba(142, 185, 255, 0.08);
+  color: var(--swap-blue);
+}
+
 /* ================= GLARE CARDS ================= */
 /* .cards-grid {
     display: grid;
