@@ -221,7 +221,7 @@ const teamData = [
     role: "CTO & Co-Founder",
     department: "Tech",
     avatar: "FY",
-    image: "./images/team_members/falak.jpeg",
+    image: "./images/team_members/falak.jpg",
     linkedin: "https://www.linkedin.com/in/falak-yadav/",
     color: "var(--gradient-hero)",
     text: "#fff",
@@ -287,7 +287,7 @@ const teamData = [
     role: "Developer",
     department: "Tech",
     avatar: "RN",
-    image: "./images/team_members/ritvik.jpeg",
+    image: "",
     linkedin: "https://www.linkedin.com/in/ritvik-nayak/",
     color: "var(--gradient-hero)",
     text: "#fff",
@@ -468,14 +468,15 @@ function initTeamMarquee() {
     gsap.killTweensOf(track);
     gsap.set(track, { x: 0 });
 
+    const isMobile = window.innerWidth <= 768;
+    const duration = isMobile ? 400 : 120; // slower on mobile
+
     tween = gsap.to(track, {
       x: -totalWidth,
-      duration: 120,
+      duration: duration * window.innerWidth,
       repeat: -1,
       ease: "none"
     });
-
-    console.log("tween created:", tween);
   });
 }
 
