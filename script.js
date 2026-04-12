@@ -469,10 +469,11 @@ function initTeamMarquee() {
     gsap.set(track, { x: 0 });
 
     const isMobile = window.innerWidth <= 768;
-    const duration = isMobile ? 400 : 120; // slower on mobile
+    const pixelsPerSecond = isMobile ? 40 : 80; // lower = slower
+    const duration = totalWidth / pixelsPerSecond;
 
     tween = gsap.to(track, {
-      x: -totalWidth,
+      x: totalWidth,
       duration: duration * window.innerWidth,
       repeat: -1,
       ease: "none"
